@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{A0BCBB3E-D3AE-459F-BBAE-8E3E8E9EB763}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>MediandoUI</RootNamespace>
+    <AssemblyName>MediandoUI</AssemblyName>
+    <TargetFrameworkProfile>Profile78</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="MyClass.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="App.cs" />
+    <Compile Include="Utilities\ControlUtilities.cs" />
+    <Compile Include="ViewsCSharp\AppSelectorView.cs" />
+    <Compile Include="ViewsCSharp\EMEA\LibraryView.cs" />
+    <Compile Include="ViewsCSharp\EMEA\NewsletterView.cs" />
+    <Compile Include="ViewsCSharp\EMEA\MyDocumentsView.cs" />
+    <Compile Include="ViewsCSharp\EMEA\SettingsView.cs" />
+    <Compile Include="ViewsCSharp\EMEA\AboutCorning.cs" />
+    <Compile Include="Utilities\ListViewCellTemplates.cs" />
+    <Compile Include="ViewsCSharp\EMEA\ViewerPage.cs" />
+    <Compile Include="Services\DependencyServices.cs" />
+    <Compile Include="Constants\ImageConstants.cs" />
+    <Compile Include="Utilities\WrapLayout.cs" />
+    <Compile Include="ViewsCSharp\EMEA\VideoView.cs" />
+    <Compile Include="Constants\ColorConstants.cs" />
+    <Compile Include="Constants\FontConstants.cs" />
+    <Compile Include="ViewsCSharp\StartView.cs" />
+    <Compile Include="Utilities\HomePageUtilities.cs" />
+    <Compile Include="Constants\Enums.cs" />
+    <Compile Include="ViewsCSharp\EMEA\WebPage.cs" />
+    <Compile Include="ViewsCSharp\BaseContentPage.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\LibraryViewModel.cs" />
+    <Compile Include="ViewModels\MyDocumentsViewModel.cs" />
+    <Compile Include="ViewModels\LibraryDetailsViewModel.cs" />
+    <Compile Include="ViewModels\MediaViewModel.cs" />
+    <Compile Include="Model\SQLiteConnection.cs" />
+    <Compile Include="Model\SQLiteDatabase.cs" />
+    <Compile Include="Services\HttpService.cs" />
+    <Compile Include="Model\WebApiConfig.cs" />
+    <Compile Include="ViewsCSharp\EMEA\DummyView.cs" />
+    <Compile Include="Model\CorningLinksModel.cs" />
+    <Compile Include="Renderers\NativeListView.cs" />
+    <Compile Include="ViewModels\FilterViewModel.cs" />
+    <Compile Include="Model\GlobalVariables.cs" />
+    <Compile Include="ViewsCSharp\EMEA\ToolbarFilters.cs" />
+    <Compile Include="ViewsCSharp\EMEA\LibraryDetailsView.cs" />
+    <Compile Include="ViewsCSharp\EMEA\DownloadViewer.cs" />
+    <Compile Include="ViewsCSharp\EMEA\NewsLetterFilters.cs" />
+    <Compile Include="ViewModels\NewsLetterFilterViewModel.cs" />
+    <Compile Include="ViewModels\NewsLetterViewModel.cs" />
+    <Compile Include="ViewModels\DocumentFiltersViewModel.cs" />
+    <Compile Include="ViewsCSharp\EMEA\DocumentsFilters.cs" />
+    <Compile Include="Renderers\CustomLabel.cs" />
+    <Compile Include="ViewsCSharp\EMEA\SearchFilters.cs" />
+    <Compile Include="ViewModels\SearchViewModel.cs" />
+    <Compile Include="ViewsCSharp\EMEA\DetailsPopup.cs" />
+    <Compile Include="Utilities\PopupLayout.cs" />
+    <Compile Include="Utilities\GestureFrame.cs" />
+    <Compile Include="Utilities\GridView.cs" />
+    <Compile Include="ViewsCSharp\EMEA\DocumentDetails.cs" />
+    <Compile Include="Utilities\Extensions.cs" />
+    <Compile Include="Utilities\CustomPicker.cs" />
+    <Compile Include="Utilities\Translation.cs" />
+    <Compile Include="Resx\AppResources.Designer.cs">
+      <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewsCSharp\EMEA\HomeView.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+  <Import Project="..\packages\Fody.1.29.3\build\portable-net+sl+win+wpa+wp\Fody.targets" Condition="Exists('..\packages\Fody.1.29.3\build\portable-net+sl+win+wpa+wp\Fody.targets')" />
+  <Import Project="..\packages\Xamarin.Forms.1.5.1.6471\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.5.1.6471\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
+  <ItemGroup>
+    <Folder Include="ViewsCSharp\" />
+    <Folder Include="Utilities\" />
+    <Folder Include="ViewsCSharp\EMEA\" />
+    <Folder Include="Renderers\" />
+    <Folder Include="Services\" />
+    <Folder Include="Constants\" />
+    <Folder Include="ViewModels\" />
+    <Folder Include="Model\" />
+    <Folder Include="Resx\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="PCLStorage">
+      <HintPath>..\packages\PCLStorage.1.0.2\lib\portable-net45+wp8+wpa81+win8+monoandroid+monotouch+Xamarin.iOS+Xamarin.Mac\PCLStorage.dll</HintPath>
+    </Reference>
+    <Reference Include="PCLStorage.Abstractions">
+      <HintPath>..\packages\PCLStorage.1.0.2\lib\portable-net45+wp8+wpa81+win8+monoandroid+monotouch+Xamarin.iOS+Xamarin.Mac\PCLStorage.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\portable-net45+wp80+win8+wpa81+dnxcore50\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="ExifLib">
+      <HintPath>..\packages\ExifLib.PCL.1.0.1\lib\portable-net45+sl50+win+WindowsPhoneApp81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10\ExifLib.dll</HintPath>
+    </Reference>
+    <Reference Include="PropertyChanged">
+      <HintPath>..\packages\PropertyChanged.Fody.1.50.3\Lib\portable-net4+sl4+wp8+win8+wpa81+MonoAndroid16+MonoTouch40\PropertyChanged.dll</HintPath>
+    </Reference>
+    <Reference Include="Connectivity.Plugin">
+      <HintPath>..\packages\Xam.Plugin.Connectivity.1.0.4\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Connectivity.Plugin.dll</HintPath>
+    </Reference>
+    <Reference Include="Connectivity.Plugin.Abstractions">
+      <HintPath>..\packages\Xam.Plugin.Connectivity.1.0.4\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Connectivity.Plugin.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="DeviceInfo.Plugin">
+      <HintPath>..\packages\Xam.Plugin.DeviceInfo.1.0.2\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\DeviceInfo.Plugin.dll</HintPath>
+    </Reference>
+    <Reference Include="DeviceInfo.Plugin.Abstractions">
+      <HintPath>..\packages\Xam.Plugin.DeviceInfo.1.0.2\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\DeviceInfo.Plugin.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Core">
+      <HintPath>..\packages\Xamarin.Forms.1.5.1.6471\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Xaml">
+      <HintPath>..\packages\Xamarin.Forms.1.5.1.6471\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Platform">
+      <HintPath>..\packages\Xamarin.Forms.1.5.1.6471\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="XLabs.Ioc">
+      <HintPath>..\packages\XLabs.IoC.2.0.5782\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1+Xamarin.iOS10\XLabs.Ioc.dll</HintPath>
+    </Reference>
+    <Reference Include="XLabs.Core">
+      <HintPath>..\packages\XLabs.Core.2.0.5782\lib\portable-net45+netcore45+wp8+MonoAndroid1+MonoTouch1\XLabs.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="XLabs.Platform">
+      <HintPath>..\packages\XLabs.Platform.2.0.5782\lib\portable-net45+netcore45+wp8+MonoAndroid1+MonoTouch1\XLabs.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="XLabs.Serialization">
+      <HintPath>..\packages\XLabs.Serialization.2.0.5782\lib\portable-net45+netcore45+wp8+MonoAndroid1+MonoTouch1\XLabs.Serialization.dll</HintPath>
+    </Reference>
+    <Reference Include="XLabs.Forms">
+      <HintPath>..\packages\XLabs.Forms.2.0.5782\lib\portable-net45+netcore45+wpa81+wp8\XLabs.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="FFImageLoading">
+      <HintPath>..\packages\Xamarin.FFImageLoading.1.1.7\lib\portable-net45+win+wp80+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10\FFImageLoading.dll</HintPath>
+    </Reference>
+    <Reference Include="FFImageLoading.Forms">
+      <HintPath>..\packages\Xamarin.FFImageLoading.Forms.1.1.7.2\lib\portable-net45+win+wp80+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10\FFImageLoading.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLite.Net">
+      <HintPath>..\packages\SQLite.Net-PCL.3.1.1\lib\portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1\SQLite.Net.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="FodyWeavers.xml" />
+    <None Include="PluginsHelp\ConnectivityReadme.txt" />
+    <None Include="DeviceInfoReadme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resx\AppResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resx\AppResources.de.resx" />
+  </ItemGroup>
+</Project>

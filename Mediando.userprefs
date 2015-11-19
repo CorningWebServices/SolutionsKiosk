@@ -1,0 +1,24 @@
+﻿<Properties StartupItem="Targets/Droid/Mediando.Droid.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.AVD_for_Nexus_5_by_Google" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Targets/iOS/DependencyService/PdfService.cs">
+    <Files>
+      <File FileName="Targets/iOS/DependencyService/FileService.cs" Line="1" Column="1" />
+      <File FileName="Targets/iOS/DependencyService/DownloadService.cs" Line="1" Column="1" />
+      <File FileName="Targets/iOS/AppDelegate.cs" Line="1" Column="1" />
+      <File FileName="Targets/iOS/Renderers/GridView/GridViewCell.cs" Line="1" Column="1" />
+      <File FileName="Targets/iOS/Renderers/GridView/GridDataSource.cs" Line="1" Column="1" />
+      <File FileName="Targets/iOS/Renderers/GridView/GridViewRenderer.cs" Line="1" Column="1" />
+      <File FileName="Targets/iOS/Renderers/GridView/GridViewDelegate.cs" Line="1" Column="1" />
+      <File FileName="MediandoUI/ViewsCSharp/EMEA/LibraryDetailsView.cs" Line="1" Column="1" />
+      <File FileName="MediandoUI/Utilities/ListViewCellTemplates.cs" Line="1" Column="1" />
+      <File FileName="MediandoUI/Resx/AppResources.resx" Line="1" Column="1" />
+      <File FileName="MediandoUI/ViewsCSharp/EMEA/AboutCorning.cs" Line="1" Column="1" />
+      <File FileName="Targets/iOS/DependencyService/PdfService.cs" Line="15" Column="2" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Targets.Mediando.Droid AndroidDesignerPreferredDevice="Nexus 4" />
+</Properties>

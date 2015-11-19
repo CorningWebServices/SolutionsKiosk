@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="source-language">
+    <value>en</value>
+  </resheader>
+	<data name="LibraryLinkMainText" xml:space="preserve">
+    <value>CORNING BIBLIOTHEK</value>
+  </data>
+	<data name="LibraryLinkDescription" xml:space="preserve">
+    <value>Dokumente online lesen</value>
+    </data>
+ 	<data name="NewsLetterLinkMainText" xml:space="preserve">
+    <value>NEWSLETTER</value>
+  </data>
+	<data name="NewsLetterLinkDescription" xml:space="preserve">
+    <value>Neue Corning Produkte und Systemlösungen, News und Events</value>
+  </data>
+   	<data name="MyDocsLinkMainText" xml:space="preserve">
+    <value>MEINE DOKUMENTE</value>
+  </data>
+	<data name="MyDocsLinkDescription" xml:space="preserve">
+    <value>Auswahl von Corning Dokumenten auf diesem Gerät</value>
+  </data>
+  <data name="AboutCorningLinkMainText" xml:space="preserve">
+    <value>ÜBER CORNING</value>
+  </data>
+	<data name="AboutCorningLinkDescription" xml:space="preserve">
+    <value>Kontakt, Unternehmen, Datenschutz, rechtlicher Hinweis</value>
+  </data>
+  <data name="AboutCorningLinkMainText" xml:space="preserve">
+    <value>ÜBER CORNING</value>
+  </data>
+   <data name="AboutCorning" xml:space="preserve">
+    <value>Über Corning</value>
+  </data>
+	<data name="AboutCorningLinkDescription" xml:space="preserve">
+    <value>Kontakt, Unternehmen, Datenschutz, rechtlicher Hinweis</value>
+  </data>
+    <data name="CorningWebsite" xml:space="preserve">
+    <value>CORNING WEBSEITE</value>
+  </data>
+  <data name="ProductCatalog" xml:space="preserve">
+    <value>PRODUKT- KATALOG</value>
+  </data>
+   <data name="HomeIcon" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="StartIcon" xml:space="preserve">
+    <value>Start</value>
+  </data>
+     <data name="LibraryIcon" xml:space="preserve">
+    <value>Bibliothek</value>
+  </data>
+  <data name="NewsLetterIcon" xml:space="preserve">
+    <value>Newsletter</value>
+  </data>
+   <data name="MyDocsIcon" xml:space="preserve">
+    <value>Meine Dokumente</value>
+  </data>
+   <data name="SettingsIcon" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+     <data name="LoadingText" xml:space="preserve">
+    <value>Laden...</value>
+  </data>
+   <data name="NoResultsText" xml:space="preserve">
+    <value>Keine Treffer</value>
+  </data>
+     <data name="ReadOnlineText" xml:space="preserve">
+    <value>Online lesen</value>
+  </data>
+   <data name="PlayOnlineText" xml:space="preserve">
+    <value>Online abspielen</value>
+  </data>
+  <data name="DownloadText" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="ReadOfflineText" xml:space="preserve">
+    <value>Offline lesen</value>
+  </data>
+   <data name="PlayOfflineText" xml:space="preserve">
+    <value>Offline abspielen</value>
+  </data>
+  <data name="DeleteText" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="DownloadVideoMessage" xml:space="preserve">
+    <value>Möchten Sie dieses Video wirklich herunterladen?</value>
+  </data>
+  <data name="DownloadDocumentMessage" xml:space="preserve">
+    <value>Möchten Sie dieses Dokument wirklich herunterladen?</value>
+  </data>
+   <data name="DeleteVideoMessage" xml:space="preserve">
+    <value>Möchten Sie dieses Video wirklich löschen?</value>
+  </data>
+  <data name="DeleteDocumentMessage" xml:space="preserve">
+    <value>Möchten Sie dieses Dokument wirklich löschen?</value>
+  </data>
+   <data name="Yes" xml:space="preserve">
+    <value>Ja</value>
+  </data>
+   <data name="No" xml:space="preserve">
+    <value>Nein</value>
+  </data>
+  <data name="DeleteTempFiles" xml:space="preserve">
+    <value>Cache löschen</value>
+  </data>
+   <data name="DeleteMediaFiles" xml:space="preserve">
+    <value>Heruntergeladene Medien löschen</value>
+  </data>
+  <data name="DownloadviaWifi" xml:space="preserve">
+    <value>Download nur über WLAN</value>
+  </data>
+  <data name="TempFilesDeletedMessage" xml:space="preserve">
+    <value>Cache wurde gelöscht</value>
+  </data>
+  <data name="DeleteMediaMessage" xml:space="preserve">
+    <value>Möchten Sie wirklich alle heruntergeladene Medien löschen?</value>
+  </data>
+    <data name="MediaFilesDeletedMessage" xml:space="preserve">
+    <value>Alle heruntergeladene Medien wurde gelöscht</value>
+  </data>
+     <data name="Ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
+   <data name="BackButton" xml:space="preserve">
+    <value>Zurück</value>
+  </data>
+  <data name="CategoriesTitle" xml:space="preserve">
+    <value>Kategorien</value>
+  </data>
+  <data name="LanguagesTitle" xml:space="preserve">
+    <value>Sprachen</value>
+  </data>
+  <data name="DoneLabel" xml:space="preserve">
+    <value>Fertig</value>
+  </data>
+  <data name="SearchLabel" xml:space="preserve">
+    <value>Suche</value>
+  </data>
+    <data name="CorningWebsiteLink" xml:space="preserve">
+    <value>https://www.corning.com/emea/de.html</value>
+  </data>
+   <data name="ProductCatalogLink" xml:space="preserve">
+    <value>http://catalog.corning.com/opcomm/de-DE/Default.aspx</value>
+  </data>
+   <data name="CorningLibraryImagePhone" xml:space="preserve">
+    <value>New/CorningLibraryde.png</value>
+  </data>
+  <data name="CorningLibraryImagePad" xml:space="preserve">
+    <value>New/CorningLibraryPadde.png</value>
+  </data>
+    <data name="AppTitleText" xml:space="preserve">
+    <value>DE</value>
+  </data>
+</root>
