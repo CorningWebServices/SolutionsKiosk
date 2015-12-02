@@ -253,10 +253,10 @@
     <value>http://catalog.corning.com/opcomm/en-GB/Default.aspx</value>
   </data>
   <data name="CorningLibraryImagePhone" xml:space="preserve">
-    <value>New/CorningLibrary.png</value>
+    <value>corningimages/CorningLibrary.png</value>
   </data>
   <data name="CorningLibraryImagePad" xml:space="preserve">
-    <value>New/CorningLibraryPad.png</value>
+    <value>corningimages/CorningLibraryPad.png</value>
   </data>
   <data name="AppTitleText" xml:space="preserve">
     <value>EN</value>

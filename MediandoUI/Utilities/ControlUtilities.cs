@@ -104,7 +104,12 @@ namespace MediandoUI
 		public static StackLayout GetAppHeader ()
 		{
 			var logo = new Image {
-				Source = "corningimages/corning_logo.png",
+				Source = Device.OnPlatform
+					(
+						iOS: "corningimages/corning_logo.png",
+						Android: "corning_logo.png",
+						WinPhone: "corning_logo.png"
+					),
 				HeightRequest = UIConstants.GetLogoSize(),
 				//WidthRequest = UIConstants.GetLogoSize(),
 				HorizontalOptions = LayoutOptions.StartAndExpand,

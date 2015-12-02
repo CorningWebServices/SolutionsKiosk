@@ -27,7 +27,7 @@ namespace MediandoUI
 					titleLabel.SetBinding (Label.TextProperty, "Name");
 
 					Image blueCheck = new Image ();
-					blueCheck.Source = "New/selected.png";
+					blueCheck.Source = "corningimages/selected.png";
 					blueCheck.WidthRequest = 18;
 					blueCheck.HeightRequest = 18;
 					blueCheck.HorizontalOptions = LayoutOptions.EndAndExpand;

@@ -8,13 +8,14 @@ namespace MediandoUI
 	{
 		Grid grid;
 		StackLayout contentLayout;
+
 		public HomeView ()
 		{
 			NavigationPage.SetHasNavigationBar (this, false);
-			NavigationPage.SetBackButtonTitle(this,Translation.Localize("BackButton"));
+			NavigationPage.SetBackButtonTitle (this, Translation.Localize ("BackButton"));
 
 
-			 grid = new Grid {
+			grid = new Grid {
 				VerticalOptions = LayoutOptions.CenterAndExpand,
 				HorizontalOptions = LayoutOptions.Center,
 				RowDefinitions = {
@@ -31,25 +32,25 @@ namespace MediandoUI
 					
 
 			var btnLibrary = HomePageButtons.GetHomePageTextButtons (
-				ImageSource: ImageConstants.libraryhomeIcon,
-								 MainText: Translation.Localize ("LibraryLinkMainText"), 
-								 DetailsText: Translation.Localize ("LibraryLinkDescription")
+				                 ImageSource: ImageConstants.libraryhomeIcon,
+				                 MainText: Translation.Localize ("LibraryLinkMainText"), 
+				                 DetailsText: Translation.Localize ("LibraryLinkDescription")
 			                 );
 
 			TapGestureRecognizer tapLibrary = new TapGestureRecognizer ();
 			tapLibrary.Tapped += (sender, args) => {
 				var masterPage = this.Parent.Parent as TabbedPage;
 				masterPage.CurrentPage = masterPage.Children [1];
-				masterPage.Children [0].Title =  Translation.Localize ("HomeIcon");
+				masterPage.Children [0].Title = Translation.Localize ("HomeIcon");
 			};
 			btnLibrary.GestureRecognizers.Add (tapLibrary);
 
 
 
 			var btnNewsLetter = HomePageButtons.GetHomePageTextButtons (
-				                    ImageSource: ImageConstants.news32Icon,
-									MainText: Translation.Localize ("NewsLetterLinkMainText"), 
-									DetailsText: Translation.Localize ("NewsLetterLinkDescription")
+				                    ImageSource: ImageConstants.newshomeIcon,
+				                    MainText: Translation.Localize ("NewsLetterLinkMainText"), 
+				                    DetailsText: Translation.Localize ("NewsLetterLinkDescription")
 				                  //  MainText: "NEWSLETTER", 
 				                  //  DetailsText: "New Corning products, system solutions, News and Events"
 			                    );
@@ -58,16 +59,16 @@ namespace MediandoUI
 			tapNews.Tapped += (sender, args) => {
 				var masterPage = this.Parent.Parent as TabbedPage;
 				masterPage.CurrentPage = masterPage.Children [2];
-				masterPage.Children [0].Title =  Translation.Localize ("HomeIcon");
+				masterPage.Children [0].Title = Translation.Localize ("HomeIcon");
 			};
 			btnNewsLetter.GestureRecognizers.Add (tapNews);
 
 
 
 			var btnDocs = HomePageButtons.GetHomePageTextButtons (
-				              ImageSource: ImageConstants.documents32Icon,
-				MainText: Translation.Localize ("MyDocsLinkMainText"), 
-				DetailsText: Translation.Localize ("MyDocsLinkDescription")
+				              ImageSource: ImageConstants.documentshomeIcon,
+				              MainText: Translation.Localize ("MyDocsLinkMainText"), 
+				              DetailsText: Translation.Localize ("MyDocsLinkDescription")
 				             // MainText: "MY DOCUMENTS", 
 				            //  DetailsText: "Collection of Corning documents on my device"
 			              );
@@ -76,7 +77,7 @@ namespace MediandoUI
 			tapDocs.Tapped += (sender, args) => {
 				var masterPage = this.Parent.Parent as TabbedPage;
 				masterPage.CurrentPage = masterPage.Children [3];
-				masterPage.Children [0].Title =  Translation.Localize ("HomeIcon");
+				masterPage.Children [0].Title = Translation.Localize ("HomeIcon");
 
 			};
 			btnDocs.GestureRecognizers.Add (tapDocs);
@@ -84,9 +85,9 @@ namespace MediandoUI
 
 
 			var btnCorning = HomePageButtons.GetHomePageTextButtons (
-				                 ImageSource: ImageConstants.about32icon,
-				MainText: Translation.Localize ("AboutCorningLinkMainText"), 
-				DetailsText: Translation.Localize ("AboutCorningLinkDescription")
+				                 ImageSource: ImageConstants.abouthomeicon,
+				                 MainText: Translation.Localize ("AboutCorningLinkMainText"), 
+				                 DetailsText: Translation.Localize ("AboutCorningLinkDescription")
 				                 //MainText: "ABOUT CORNING", 
 				                 //DetailsText: "Contact us, Corporate, Data Protection, Copyright"
 			                 );
@@ -111,23 +112,23 @@ namespace MediandoUI
 			TapGestureRecognizer tapCorningLinks = new TapGestureRecognizer ();
 			tapCorningLinks.Tapped += async (sender, args) => {
 				var masterPage = this.Parent.Parent as TabbedPage;
-				masterPage.Children [0].Title =  Translation.Localize ("HomeIcon");
-				var fileItem = new CorningLinks("CorningWebsite", Translation.Localize ("CorningWebsiteLink"));
-				var page = (Page)Activator.CreateInstance (typeof(WebPage),fileItem);
-				await this.Navigation.PushAsync(page,true);
+				masterPage.Children [0].Title = Translation.Localize ("HomeIcon");
+				var fileItem = new CorningLinks ("CorningWebsite", Translation.Localize ("CorningWebsiteLink"));
+				var page = (Page)Activator.CreateInstance (typeof(WebPage), fileItem);
+				await this.Navigation.PushAsync (page, true);
 			};
 			corningWebsite.GestureRecognizers.Add (tapCorningLinks);
 
 			var productCatalog = HomePageButtons.CreateEMEAHomeButton (
 				                     ImageSource: ImageConstants.catalogIcon,
-				Description: Translation.Localize ("ProductCatalog"));
+				                     Description: Translation.Localize ("ProductCatalog"));
 			TapGestureRecognizer tapCatalog = new TapGestureRecognizer ();
 			tapCatalog.Tapped += async (sender, args) => {
 				var masterPage = this.Parent.Parent as TabbedPage;
 				masterPage.Children [0].Title = Translation.Localize ("HomeIcon");
-				var fileItem = new CorningLinks("ProductCatalog", Translation.Localize ("ProductCatalogLink"));
-				var page = (Page)Activator.CreateInstance (typeof(WebPage),fileItem);
-				await this.Navigation.PushAsync(page,true);
+				var fileItem = new CorningLinks ("ProductCatalog", Translation.Localize ("ProductCatalogLink"));
+				var page = (Page)Activator.CreateInstance (typeof(WebPage), fileItem);
+				await this.Navigation.PushAsync (page, true);
 			};
 			productCatalog.GestureRecognizers.Add (tapCatalog);
 
@@ -152,14 +153,13 @@ namespace MediandoUI
 			if (Device.Idiom != TargetIdiom.Phone) {
 				grdButtons.Padding = 30;
 				grid.WidthRequest = 520;
-			} 
-			else {
+			} else {
 				if (App.CurrentDevice == IOSDevices.IPhone4S) {
 					grid.Padding = new Thickness (10, 5, 10, 0);
 				} else if (App.CurrentDevice == IOSDevices.IPhone5 || App.CurrentDevice == IOSDevices.IPhone5S) {
 					grid.Padding = 10;
-				} else  {
-					if (GlobalVariables.CurrentLocale.StartsWith("en")) {
+				} else {
+					if (GlobalVariables.CurrentLocale.StartsWith ("en")) {
 						grid.Padding = new Thickness (10, 20, 10, 5);
 					} else {
 						grid.Padding = new Thickness (10, 20, 10, 0);
@@ -177,13 +177,30 @@ namespace MediandoUI
 			var scrolView = new ScrollView ();
 			scrolView.Content = grid;
 
-		 	contentLayout = new StackLayout { 
-				Padding = 0,
-				Children = {
-					ControlUtilities.GetAppHeader (),
-					scrolView
+			Device.OnPlatform (
+				iOS: () => contentLayout = new StackLayout { 
+					Padding = 0,
+					Children = {
+						ControlUtilities.GetAppHeader (),
+						scrolView
+					},
 				},
-			};
+				Android: () => contentLayout = new StackLayout { 
+					Padding = 0,
+					Children = {
+						//ControlUtilities.GetAppHeader (),
+						scrolView
+					},
+				},
+				WinPhone: () => contentLayout = new StackLayout { 
+					Padding = 0,
+					Children = {
+						ControlUtilities.GetAppHeader (),
+						scrolView
+					},
+				}
+			);
+		 	
 			this.Content = contentLayout;
 			this.BackgroundImage = ImageConstants.backgroundImage;	
 
@@ -200,9 +217,9 @@ namespace MediandoUI
 			App.ShowAppSelection = true;
 		}
 
-		protected override void OnSizeAllocated(double width, double height)
+		protected override void OnSizeAllocated (double width, double height)
 		{
-			base.OnSizeAllocated(width, height); // Important!
+			base.OnSizeAllocated (width, height); // Important!
 			if (contentLayout.WidthRequest != width) {
 				contentLayout.WidthRequest = width;
 				if (width > height) {

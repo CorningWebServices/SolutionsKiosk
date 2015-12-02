@@ -10,7 +10,7 @@ namespace MediandoUI
 		public StartView ()
 		{
 			this.BackgroundImage = ImageConstants.backgroundImage;
-
+			//this.Title = "Corning";
 			this.Children.Clear ();
 
 			this.Children.Add (new NavigationPage(new DummyView ()){
@@ -48,7 +48,6 @@ namespace MediandoUI
 				BarBackgroundColor = Color.Black,
 				BarTextColor = Color.White,
 			});
-
 		}
 	}
 }

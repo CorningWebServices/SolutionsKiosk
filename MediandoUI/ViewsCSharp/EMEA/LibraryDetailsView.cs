@@ -151,7 +151,7 @@ namespace MediandoUI
 					await Navigation.PushModalAsync (content, true);
 				}));
 
-			ToolbarItems.Add (new ToolbarItem ("Refresh", "New/refresh.png", () => {
+			ToolbarItems.Add (new ToolbarItem ("Refresh", "corningimages/refresh.png", () => {
 				LoadDataAsync ();
 			}));
 

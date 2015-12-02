@@ -26,7 +26,7 @@ namespace MediandoUI
 				Children = {
 					new Image { 
 						//BackgroundColor = Color.FromHex("#006699"),
-						Source = "cornimages/corninglogo.png",
+						Source = "corningimages/corninglogo.png",
 						WidthRequest = 200,
 						HeightRequest = 200
 					}

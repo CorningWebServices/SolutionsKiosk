@@ -232,32 +232,12 @@ namespace MediandoUI
 				RetryDelay = 250,
 				TransparencyEnabled = false,
 				// Shown after loading error occurs:
-				ErrorPlaceholder = "cornimages/loading.png",
+				ErrorPlaceholder = "corningimages/loading.png",
 				// Shown before targe image is loaded:
-				LoadingPlaceholder = "cornimages/loading.png",
+				LoadingPlaceholder = "corningimages/loading.png",
 			};
 
 			thumbnailImage.SetBinding (CachedImage.SourceProperty, new Binding ("ThumbPath", converter: new NoCacheConverter ()));
-
-//			var thumbnailImage = new CachedImage() {
-//				HorizontalOptions = LayoutOptions.StartAndExpand,
-//				VerticalOptions = LayoutOptions.StartAndExpand,
-//				WidthRequest = UIConstants.GetGridViewItemWidths (),
-//				HeightRequest = UIConstants.GetGridViewItemHeights () - 40,
-//				BackgroundColor = ColorConstants.SemiOpaqueBackground,
-//
-//				CacheDuration = TimeSpan.FromDays(30),
-//				DownsampleHeight = UIConstants.GetThumbnailHeight ()-100,
-//				RetryCount = 3,
-//				RetryDelay = 250,
-//				TransparencyEnabled = false,
-//				// Shown after loading error occurs:
-//				ErrorPlaceholder = "cornimages/loading.png",
-//				// Shown before targe image is loaded:
-//				LoadingPlaceholder = "New/foldedpdf.png"
-//			};
-//
-//			thumbnailImage.SetBinding (CachedImage.SourceProperty, new Binding ("ThumbPath", converter: new NoCacheConverter ()));
 
 
 			var titleLabel = new CustomLabel2 () {
@@ -326,9 +306,9 @@ namespace MediandoUI
 				RetryDelay = 250,
 				TransparencyEnabled = false,
 				// Shown after loading error occurs:
-				ErrorPlaceholder = "cornimages/loading.png",
+				ErrorPlaceholder = "corningimages/loading.png",
 				// Shown before targe image is loaded:
-				LoadingPlaceholder = "cornimages/loading.png",
+				LoadingPlaceholder = "corningimages/loading.png",
 			};
 
 			thumbnailImage.SetBinding (CachedImage.SourceProperty, new Binding ("ThumbPath", converter: new NoCacheConverter ()));
@@ -537,9 +517,9 @@ namespace MediandoUI
 				RetryDelay = 250,
 				TransparencyEnabled = false,
 				// Shown after loading error occurs:
-				ErrorPlaceholder = "cornimages/loading.png",
+				ErrorPlaceholder = "corningimages/loading.png",
 				// Shown before targe image is loaded:
-				LoadingPlaceholder = "cornimages/loading.png",
+				LoadingPlaceholder = "corningimages/loading.png",
 			};
 
 			thumbnailImage.SetBinding (CachedImage.SourceProperty, new Binding ("ThumbPath", converter: new NoCacheConverter ()));

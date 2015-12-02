@@ -1,6 +1,6 @@
 ﻿using System;
 using Xamarin.Forms;
-using Connectivity.Plugin;
+using Plugin.Connectivity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Globalization;
@@ -79,7 +79,13 @@ namespace MediandoUI
 
 
 		public static bool IsOnline() {
+			try{
 			return CrossConnectivity.Current.IsConnected;
+			}catch(Exception ex){
+				var str = ex.StackTrace;
+				return true;
+			}
+			//return true;
 		}
 
 		public static bool IsWifiReachable() {

@@ -24,24 +24,72 @@ namespace MediandoUI
 			BindingContext = new LibraryViewModel ();
 			ViewModel.IsRunning = true;
 
-			 grid = new Grid {
-				VerticalOptions = LayoutOptions.Center,
-				HorizontalOptions = LayoutOptions.Center,
-				RowDefinitions = {
-					new RowDefinition { Height = GridLength.Auto },
-					new RowDefinition { Height = GridLength.Auto },
-					new RowDefinition { Height = GridLength.Auto },
-				},
-				ColumnDefinitions = {
-					new ColumnDefinition { Width = new GridLength (1, GridUnitType.Star) },
-				}
-			};
 
-			grid.Children.Add (ControlUtilities.GetAppHeader (), 0, 0);
-			grid.Children.Add (GetBreadCrumbs(), 0, 1);
-			grid.Children.Add (CreateLibraryListView(), 0, 2);
-			grid.Children.Add (CreateLoadingIndicator(), 0, 2);
-			grid.Children.Add (ShowEmptyResults(), 0, 2);
+			Device.OnPlatform 
+			(
+				iOS: () => { 
+					grid = new Grid {
+						VerticalOptions = LayoutOptions.Center,
+						HorizontalOptions = LayoutOptions.Center,
+						RowDefinitions = {
+							new RowDefinition { Height = GridLength.Auto },
+							new RowDefinition { Height = GridLength.Auto },
+							new RowDefinition { Height = GridLength.Auto },
+						},
+						ColumnDefinitions = {
+							new ColumnDefinition { Width = new GridLength (1, GridUnitType.Star) },
+						}
+					};
+
+					grid.Children.Add (ControlUtilities.GetAppHeader (), 0, 0);
+					grid.Children.Add (GetBreadCrumbs(), 0, 1);
+					grid.Children.Add (CreateLibraryListView(), 0, 2);
+					grid.Children.Add (CreateLoadingIndicator(), 0, 2);
+					grid.Children.Add (ShowEmptyResults(), 0, 2);
+				},
+				Android: () => {
+					grid = new Grid {
+						VerticalOptions = LayoutOptions.Center,
+						HorizontalOptions = LayoutOptions.Center,
+						RowDefinitions = {
+							new RowDefinition { Height = GridLength.Auto },
+							new RowDefinition { Height = GridLength.Auto },
+							//new RowDefinition { Height = GridLength.Auto },
+						},
+						ColumnDefinitions = {
+							new ColumnDefinition { Width = new GridLength (1, GridUnitType.Star) },
+						}
+					};
+
+					//grid.Children.Add (ControlUtilities.GetAppHeader (), 0, 0);
+					grid.Children.Add (GetBreadCrumbs(), 0, 0);
+					grid.Children.Add (CreateLibraryListView(), 0, 1);
+					grid.Children.Add (CreateLoadingIndicator(), 0, 1);
+					grid.Children.Add (ShowEmptyResults(), 0, 1);
+				},
+				WinPhone: () => {
+					grid = new Grid {
+						VerticalOptions = LayoutOptions.Center,
+						HorizontalOptions = LayoutOptions.Center,
+						RowDefinitions = {
+							new RowDefinition { Height = GridLength.Auto },
+							new RowDefinition { Height = GridLength.Auto },
+							new RowDefinition { Height = GridLength.Auto },
+						},
+						ColumnDefinitions = {
+							new ColumnDefinition { Width = new GridLength (1, GridUnitType.Star) },
+						}
+					};
+
+					grid.Children.Add (ControlUtilities.GetAppHeader (), 0, 0);
+					grid.Children.Add (GetBreadCrumbs(), 0, 1);
+					grid.Children.Add (CreateLibraryListView(), 0, 2);
+					grid.Children.Add (CreateLoadingIndicator(), 0, 2);
+					grid.Children.Add (ShowEmptyResults(), 0, 2);
+				}
+			);
+
+
 
 			Content = grid;
 

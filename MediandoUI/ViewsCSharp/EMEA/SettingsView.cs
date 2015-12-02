@@ -63,29 +63,7 @@ namespace MediandoUI
 					}
 				}),
 			};
-
-//			languagePicker = new Picker {
-//				Title = "Language",
-//				VerticalOptions = LayoutOptions.CenterAndExpand,
-//				//BackgroundColor = Color.Gray,
-//				WidthRequest = 200,
-//
-//			};
-//
-//			languages = db.GetLanguages ().OrderBy(i=>i.LanguageName).ToList();
-//
-//			foreach (var lang in languages) {
-//				languagePicker.Items.Add (lang.LanguageName);
-//			}
-//
-//			//var languages = db.GetLanguages ().OrderBy(i=>i.LanguageName);
-//			languagePicker.SelectedIndexChanged += (sender, args) => {
-//				var selectedValue = languagePicker.Items [languagePicker.SelectedIndex];
-//				var selectedCode = languages.FirstOrDefault(i=>i.LanguageName == selectedValue).LanguageRefCode;
-//				db.UpdateSettings ("Language", selectedCode);
-//				GlobalVariables.SelectedLanguage = selectedCode;
-//			};
-
+				
 				
 			var switchCell = new SwitchCell ();
 			switchCell.Text = Translation.Localize("DownloadviaWifi"); 
@@ -132,6 +110,33 @@ namespace MediandoUI
 					tableView
 				}
 			};
+
+			Device.OnPlatform (
+				iOS: () => {
+					this.Content = new StackLayout {
+						Children = {
+							ControlUtilities.GetAppHeader (),
+							tableView
+						}
+					};
+				},
+				Android: () => {
+					this.Content = new StackLayout {
+						Children = {
+							//ControlUtilities.GetAppHeader (),
+							tableView
+						}
+					};
+				},
+				WinPhone: () => {
+					this.Content = new StackLayout {
+						Children = {
+							ControlUtilities.GetAppHeader (),
+							tableView
+						}
+					};
+				}
+			);
 
 		}
 

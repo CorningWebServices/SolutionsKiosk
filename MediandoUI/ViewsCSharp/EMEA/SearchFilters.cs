@@ -136,7 +136,7 @@ namespace MediandoUI
 
 
 			var tapImage = new Image () {
-				Source = "New/nextblack.png",
+				Source = "corningimages/nextblack.png",
 				HorizontalOptions = LayoutOptions.End,
 				HeightRequest = 18,
 				WidthRequest=18,

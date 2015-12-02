@@ -157,10 +157,10 @@
     <value>http://catalog.corning.com/opcomm/de-DE/Default.aspx</value>
   </data>
    <data name="CorningLibraryImagePhone" xml:space="preserve">
-    <value>New/CorningLibraryde.png</value>
+    <value>corningimages/CorningLibraryde.png</value>
   </data>
   <data name="CorningLibraryImagePad" xml:space="preserve">
-    <value>New/CorningLibraryPadde.png</value>
+    <value>corningimages/CorningLibraryPadde.png</value>
   </data>
     <data name="AppTitleText" xml:space="preserve">
     <value>DE</value>

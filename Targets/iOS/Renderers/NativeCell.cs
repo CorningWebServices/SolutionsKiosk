@@ -21,7 +21,7 @@ namespace Mediando.iOS
 			ContentView.BackgroundColor = UIColor.Clear;
 
 			imageView = new UIImageView();
-			imageView.Image = UIImage.FromFile ("New/foldeddoc.png");
+			imageView.Image = UIImage.FromFile ("corningimages/foldeddoc.png");
 
 			nameLabel = new UILabel () {
 				TextColor = UIColor.Black,
