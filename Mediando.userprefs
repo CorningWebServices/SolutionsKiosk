@@ -1,24 +1,6 @@
 ﻿<Properties StartupItem="Targets/Droid/Mediando.Droid.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.4f304247" />
-  <MonoDevelop.Ide.Workbench>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="Mediando" expanded="True">
-            <Node name="Targets" expanded="True">
-              <Node name="Mediando.Droid" expanded="True">
-                <Node name="Packages" expanded="True" />
-                <Node name="Resources" expanded="True">
-                  <Node name="drawable" expanded="True" selected="True" />
-                </Node>
-              </Node>
-            </Node>
-            <Node name="MediandoUI" expanded="True" />
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
