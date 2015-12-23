@@ -1,0 +1,1 @@
+/Users/muralidatla/Documents/SolutionsKiosk/Targets/Droid/obj/Debug/MonoAndroid,Version=v6.0.AssemblyAttribute.cs
