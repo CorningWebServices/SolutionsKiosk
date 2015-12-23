@@ -1,5 +1,6 @@
 ﻿using System;
 using Xamarin.Forms;
+using System.Threading.Tasks;
 
 namespace MediandoUI
 {
@@ -9,11 +10,37 @@ namespace MediandoUI
 		Grid grid;
 		StackLayout contentLayout;
 
+		protected BaseViewModel ViewModel {
+			get { return BindingContext as BaseViewModel; }
+			set { BindingContext = value; }
+		}
+
+		AppSelectorView loginModal = new AppSelectorView();
+		void tbi_Clicked (object sender, EventArgs e)
+		{
+			var selector = new NavigationPage (loginModal) {
+				BarBackgroundColor = Color.Black,
+				BarTextColor = Color.White,
+			};
+			this.Navigation.PushModalAsync (selector, false);
+		}
+
 		public HomeView ()
 		{
-			NavigationPage.SetHasNavigationBar (this, false);
-			NavigationPage.SetBackButtonTitle (this, Translation.Localize ("BackButton"));
+			NavigationPage.SetTitleIcon (this, "corning_logo.png"); 
+	
+			ToolbarItem tbi = new ToolbarItem ();
+			tbi.Text = "Start";
+			tbi.Icon = "home.png";
+			tbi.Clicked += tbi_Clicked;
+			this.ToolbarItems.Add (tbi);
 
+			loginModal.Disappearing += (sender, e) => {
+				this.OnAppearing();
+			};
+
+			NavigationPage.SetBackButtonTitle (this, Translation.Localize ("BackButton"));
+			BindingContext = new BaseViewModel ();
 
 			grid = new Grid {
 				VerticalOptions = LayoutOptions.CenterAndExpand,
@@ -39,9 +66,17 @@ namespace MediandoUI
 
 			TapGestureRecognizer tapLibrary = new TapGestureRecognizer ();
 			tapLibrary.Tapped += (sender, args) => {
-				var masterPage = this.Parent.Parent as TabbedPage;
-				masterPage.CurrentPage = masterPage.Children [1];
-				masterPage.Children [0].Title = Translation.Localize ("HomeIcon");
+				Device.OnPlatform (
+					iOS: () => {
+						var masterPage = this.Parent.Parent as TabbedPage;
+						masterPage.CurrentPage = masterPage.Children [1];
+						masterPage.Children [0].Title = Translation.Localize ("HomeIcon");
+					},
+					Android: () => {
+						var masterPage = this.Parent as TabbedPage;
+						masterPage.CurrentPage = masterPage.Children [1];
+					}
+				);
 			};
 			btnLibrary.GestureRecognizers.Add (tapLibrary);
 
@@ -57,9 +92,17 @@ namespace MediandoUI
 
 			TapGestureRecognizer tapNews = new TapGestureRecognizer ();
 			tapNews.Tapped += (sender, args) => {
-				var masterPage = this.Parent.Parent as TabbedPage;
-				masterPage.CurrentPage = masterPage.Children [2];
-				masterPage.Children [0].Title = Translation.Localize ("HomeIcon");
+				Device.OnPlatform (
+					iOS: () => {
+						var masterPage = this.Parent.Parent as TabbedPage;
+						masterPage.CurrentPage = masterPage.Children [2];
+						masterPage.Children [0].Title = Translation.Localize ("HomeIcon");
+					},
+					Android: () => {
+						var masterPage = this.Parent as TabbedPage;
+						masterPage.CurrentPage = masterPage.Children [2];
+					}
+				);
 			};
 			btnNewsLetter.GestureRecognizers.Add (tapNews);
 
@@ -75,10 +118,17 @@ namespace MediandoUI
 
 			TapGestureRecognizer tapDocs = new TapGestureRecognizer ();
 			tapDocs.Tapped += (sender, args) => {
-				var masterPage = this.Parent.Parent as TabbedPage;
-				masterPage.CurrentPage = masterPage.Children [3];
-				masterPage.Children [0].Title = Translation.Localize ("HomeIcon");
-
+				Device.OnPlatform (
+					iOS: () => {
+						var masterPage = this.Parent.Parent as TabbedPage;
+						masterPage.CurrentPage = masterPage.Children [3];
+						masterPage.Children [0].Title = Translation.Localize ("HomeIcon");
+					},
+					Android: () => {
+						var masterPage = this.Parent as TabbedPage;
+						masterPage.CurrentPage = masterPage.Children [3];
+					}
+				);
 			};
 			btnDocs.GestureRecognizers.Add (tapDocs);
 
@@ -93,12 +143,18 @@ namespace MediandoUI
 			                 );
 
 			TapGestureRecognizer tapCorning = new TapGestureRecognizer ();
-			tapCorning.Tapped += async (sender, args) => {
-				var masterPage = this.Parent.Parent as TabbedPage;
-				masterPage.Children [0].Title = Translation.Localize ("HomeIcon");
-				var page = (Page)Activator.CreateInstance (typeof(AboutCorning));
-				await this.Navigation.PushAsync (page, true);
-
+			tapCorning.Tapped += (sender, args) => {
+				Device.OnPlatform (
+					iOS: async () => {
+						var masterPage = this.Parent.Parent as TabbedPage;
+						masterPage.Children [0].Title = Translation.Localize ("HomeIcon");
+						var page = (Page)Activator.CreateInstance (typeof(AboutCorning));
+						await this.Navigation.PushAsync (page, true);
+					},
+					Android: async () => {
+						await this.Navigation.PushAsync (new AboutCorning (),true);
+					}
+				);
 			};
 			btnCorning.GestureRecognizers.Add (tapCorning);
 
@@ -110,12 +166,23 @@ namespace MediandoUI
 			                     );
 
 			TapGestureRecognizer tapCorningLinks = new TapGestureRecognizer ();
-			tapCorningLinks.Tapped += async (sender, args) => {
-				var masterPage = this.Parent.Parent as TabbedPage;
-				masterPage.Children [0].Title = Translation.Localize ("HomeIcon");
-				var fileItem = new CorningLinks ("CorningWebsite", Translation.Localize ("CorningWebsiteLink"));
-				var page = (Page)Activator.CreateInstance (typeof(WebPage), fileItem);
-				await this.Navigation.PushAsync (page, true);
+			tapCorningLinks.Tapped += (sender, args) => {
+				Device.OnPlatform (
+					iOS: async () => {
+						var masterPage = this.Parent.Parent as TabbedPage;
+						masterPage.Children [0].Title = Translation.Localize ("HomeIcon");
+						var fileItem = new CorningLinks ("CorningWebsite", Translation.Localize ("CorningWebsiteLink"));
+						var page = (Page)Activator.CreateInstance (typeof(WebPage), fileItem);
+						await this.Navigation.PushAsync (page, true);
+					},
+					Android: async () => {
+						var fileItem = new CorningLinks ("CorningWebsite", Translation.Localize ("CorningWebsiteLink"));
+						var page = (Page)Activator.CreateInstance (typeof(WebPage), fileItem);
+						await this.Navigation.PushAsync (page, true);
+					}
+				);
+
+
 			};
 			corningWebsite.GestureRecognizers.Add (tapCorningLinks);
 
@@ -123,12 +190,23 @@ namespace MediandoUI
 				                     ImageSource: ImageConstants.catalogIcon,
 				                     Description: Translation.Localize ("ProductCatalog"));
 			TapGestureRecognizer tapCatalog = new TapGestureRecognizer ();
-			tapCatalog.Tapped += async (sender, args) => {
-				var masterPage = this.Parent.Parent as TabbedPage;
-				masterPage.Children [0].Title = Translation.Localize ("HomeIcon");
-				var fileItem = new CorningLinks ("ProductCatalog", Translation.Localize ("ProductCatalogLink"));
-				var page = (Page)Activator.CreateInstance (typeof(WebPage), fileItem);
-				await this.Navigation.PushAsync (page, true);
+			tapCatalog.Tapped += (sender, args) => {
+				// Analysis disable once ConvertToLambdaExpression
+				Device.OnPlatform (
+					iOS: async () => {
+						var masterPage = this.Parent.Parent as TabbedPage;
+						masterPage.Children [0].Title = Translation.Localize ("HomeIcon");
+						var fileItem = new CorningLinks ("ProductCatalog", Translation.Localize ("ProductCatalogLink"));
+						var page = (Page)Activator.CreateInstance (typeof(WebPage), fileItem);
+						await this.Navigation.PushAsync (page, true);
+					},
+					Android: async () => {
+						var fileItem = new CorningLinks ("ProductCatalog", Translation.Localize ("ProductCatalogLink"));
+						var page = (Page)Activator.CreateInstance (typeof(WebPage), fileItem);
+						await this.Navigation.PushAsync (page, true);
+					}
+				);
+
 			};
 			productCatalog.GestureRecognizers.Add (tapCatalog);
 
@@ -185,12 +263,15 @@ namespace MediandoUI
 						scrolView
 					},
 				},
-				Android: () => contentLayout = new StackLayout { 
-					Padding = 0,
-					Children = {
-						//ControlUtilities.GetAppHeader (),
-						scrolView
-					},
+				Android: () => {
+					//grid.Children.Add (CreateLoadingIndicator (), 0, 2);
+					contentLayout = new StackLayout { 
+						Padding = 0,
+						Children = {
+							//ControlUtilities.GetAppHeader (),
+							scrolView
+						},
+					};
 				},
 				WinPhone: () => contentLayout = new StackLayout { 
 					Padding = 0,
@@ -209,12 +290,14 @@ namespace MediandoUI
 		protected override void OnAppearing ()
 		{
 			base.OnAppearing ();
-			var masterPage = this.Parent.Parent as TabbedPage;
-			masterPage.Children [0].Title = Translation.Localize ("StartIcon");
-
-			masterPage.Children [0].IsEnabled = false;
-
-			App.ShowAppSelection = true;
+			Device.OnPlatform (
+				iOS: () => {
+					var masterPage = this.Parent.Parent as TabbedPage;
+					masterPage.Children [0].Title = Translation.Localize ("StartIcon");
+					masterPage.Children [0].IsEnabled = false;
+					App.ShowAppSelection = true;
+				}
+			);
 		}
 
 		protected override void OnSizeAllocated (double width, double height)

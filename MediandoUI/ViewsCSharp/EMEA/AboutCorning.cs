@@ -13,7 +13,8 @@ namespace MediandoUI
 
 		public AboutCorning ()
 		{
-			NavigationPage.SetHasNavigationBar (this, false);
+			//NavigationPage.SetTitleIcon (this, "corning_logo.png"); 
+			//NavigationPage.SetHasNavigationBar (this, false);
 			NavigationPage.SetBackButtonTitle(this,Translation.Localize("BackButton"));
 
 			listView = new ListView {

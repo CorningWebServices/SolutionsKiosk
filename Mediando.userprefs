@@ -1,6 +1,13 @@
 ﻿<Properties StartupItem="Targets/Droid/Mediando.Droid.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.4f304247" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.Xamarin_Android_API_15" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Targets/Droid/DependencyService/PdfService.cs">
+    <Files>
+      <File FileName="Targets/Droid/DependencyService/PdfService.cs" Line="28" Column="29" />
+      <File FileName="Targets/Droid/DependencyService/LocaleService.cs" Line="1" Column="1" />
+      <File FileName="MediandoUI/ViewsCSharp/AppSelectorView.cs" Line="1" Column="1" />
+      <File FileName="Targets/Droid/MainActivity.cs" Line="33" Column="2" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

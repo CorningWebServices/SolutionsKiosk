@@ -36,9 +36,25 @@ namespace MediandoUI
 
 			Database = new MediandoDatabase ();
 			//SyncData (Database);
+			Device.OnPlatform(
+				iOS: () => { 
+					var homePage = new StartView ();
+					MainPage = homePage;
+				},
+				Android:() => {
+					var homePage = new NavigationPage (new StartView ()) {
+						BarBackgroundColor = Color.Black,
+						BarTextColor = Color.White,
+					};
+					MainPage = homePage;
+				},
+				WinPhone:()=>{
+					var homePage = new StartView ();
+					MainPage = homePage;
+				}
+			);
 
-			var homePage = new StartView ();
-			MainPage = homePage;
+
 			App.AppSelected = ApplicationID.Default;
 		}
 
@@ -100,17 +116,30 @@ namespace MediandoUI
 		public static IOSDevices CurrentDevice
 		{
 			get{
-				#if DEBUG
-					if(_currentDevice == IOSDevices.Simulator){
-						return IOSDevices.IPhone6SPlus;
-					}
-				return _currentDevice;
-				#else
-				return _currentDevice;
-				#endif
+				//if(_currentDevice == IOSDevices)
+//				#if DEBUG
+//					if(_currentDevice == IOSDevices.Simulator){
+//						return IOSDevices.IPhone6S;
+//					}
+//				return _currentDevice;
+//				#else
+//				return _currentDevice;
+//				#endif
+				return IOSDevices.IPhone5;
 			}
 			set{
 				_currentDevice = value;
+			}
+		}
+
+		private static DeviceGroup _currentDeviceGroup;
+		public static DeviceGroup CurrentDeviceGroup
+		{
+			get{
+				return _currentDeviceGroup;
+			}
+			set{
+				_currentDeviceGroup = value;
 			}
 		}
 

@@ -143,10 +143,10 @@ namespace MediandoUI
 		protected override void OnAppearing ()
 		{
 			base.OnAppearing ();
-
-			var masterPage = this.Parent.Parent as TabbedPage;
-			masterPage.Children [0].Title =  Translation.Localize ("HomeIcon");
-
+			Device.OnPlatform (iOS: () => {
+				var masterPage = this.Parent.Parent as TabbedPage;
+				masterPage.Children [0].Title = Translation.Localize ("HomeIcon");
+			});
 			var fileService = DependencyService.Get<IFileService> ();
 			if (fileService != null) {
 				fileService.GetTempSize ((long size) => {
@@ -181,22 +181,6 @@ namespace MediandoUI
 
 				});
 			}
-//			var settings = db.GetDefaultSettings ().ToList ();
-//			var langValue = settings.FirstOrDefault (i => i.Key == "Language").Value;
-//
-//			if (languagePicker.Items.Count == 0) {
-//				languages = db.GetLanguages ().OrderBy(i=>i.LanguageName).ToList();
-//
-//				foreach (var lang in languages) {
-//					languagePicker.Items.Add (lang.LanguageName);
-//				}
-//			}
-//
-//			if (langValue == "British_English") {
-//				languagePicker.SelectedIndex = 0;
-//			} else {
-//				languagePicker.SelectedIndex = 1;
-//			}
 
 		}
 

@@ -110,7 +110,7 @@ namespace MediandoUI
 						Android: "corning_logo.png",
 						WinPhone: "corning_logo.png"
 					),
-				HeightRequest = UIConstants.GetLogoSize(),
+				//HeightRequest = UIConstants.GetLogoSize(),
 				//WidthRequest = UIConstants.GetLogoSize(),
 				HorizontalOptions = LayoutOptions.StartAndExpand,
 				VerticalOptions = LayoutOptions.StartAndExpand

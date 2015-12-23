@@ -14,6 +14,7 @@ namespace MediandoUI
 		Grid grid;
 		LayoutType CurrentLayout;
 		Label breadcrumbcategory;
+		public static LibraryDetailsView Instance;
 
 		protected LibraryDetailsViewModel ViewModel {
 			get { return BindingContext as LibraryDetailsViewModel; }
@@ -22,7 +23,8 @@ namespace MediandoUI
 
 		public LibraryDetailsView ()
 		{
-			NavigationPage.SetBackButtonTitle(this,Translation.Localize("BackButton"));
+			Instance = this;
+			NavigationPage.SetBackButtonTitle (this, Translation.Localize ("BackButton"));
 			BindingContext = new LibraryDetailsViewModel ();
 			ViewModel.IsRunning = true;
 			CurrentLayout = LayoutType.ListLayout;
@@ -56,11 +58,11 @@ namespace MediandoUI
 
 
 				grid = new Grid {
-					VerticalOptions = LayoutOptions.Center,
+					VerticalOptions = LayoutOptions.StartAndExpand,
 					HorizontalOptions = LayoutOptions.Center,
 					RowDefinitions = {
 						new RowDefinition { Height = GridLength.Auto },
-						new RowDefinition { Height = GridLength.Auto },
+						new RowDefinition { Height = new GridLength (1, GridUnitType.Star) },
 					},
 					ColumnDefinitions = {
 						new ColumnDefinition { Width = new GridLength (1, GridUnitType.Star) },
@@ -78,18 +80,34 @@ namespace MediandoUI
 
 			} else {
 				if (imageGrid == null) {
-					imageGrid = new GridView {
-						//BackgroundColor = Color.Green,
-						RowSpacing = 5,
-						Padding = 5,
-						ColumnSpacing = 5,
-						WidthRequest = listView.Width,
-						HeightRequest = App.ScreenHeight,
-						ItemWidth = UIConstants.GetGridViewItemWidths (),
-						ItemHeight = UIConstants.GetGridViewItemHeights (),
-						ItemsSource = ViewModel.ImageFiles,
-						ItemTemplate = new DataTemplate (typeof(GridViewCellTemplate)),
-					};
+
+					Device.OnPlatform (
+						iOS: () => {
+							imageGrid = new GridView {
+								//BackgroundColor = Color.Green,
+								RowSpacing = 5,
+								Padding = 5,
+								ColumnSpacing = 5,
+								WidthRequest = listView.Width,
+								HeightRequest = App.ScreenHeight,
+								ItemWidth = UIConstants.GetGridViewItemWidths (),
+								ItemHeight = UIConstants.GetGridViewItemHeights (),
+								ItemsSource = ViewModel.ImageFiles,
+								ItemTemplate = new DataTemplate (typeof(GridViewCellTemplate)),
+							};
+						},
+						Android: () => {
+							imageGrid = new GridView {
+								Padding = 20,
+								RowSpacing = 20,
+								ColumnSpacing = 20,
+								ItemWidth = 500,
+								ItemHeight = 732,
+								ItemsSource = ViewModel.ImageFiles,
+								ItemTemplate = new DataTemplate (typeof(DynamicLibraryTemplateLayout)),
+								IsClippedToBounds = true,
+							};
+						});
 
 					imageGrid.ItemSelected += (sender, e) => {
 						var currentItem = (ProductCatalog)e.Value;
@@ -100,12 +118,12 @@ namespace MediandoUI
 
 				}
 
-				Grid grid = new Grid {
-					VerticalOptions = LayoutOptions.Center,
+				grid = new Grid {
+					VerticalOptions = LayoutOptions.StartAndExpand,
 					HorizontalOptions = LayoutOptions.Center,
 					RowDefinitions = {
 						new RowDefinition { Height = GridLength.Auto },
-						new RowDefinition { Height = GridLength.Auto },
+						new RowDefinition { Height = new GridLength (1, GridUnitType.Star) },
 					},
 					ColumnDefinitions = {
 						new ColumnDefinition { Width = new GridLength (1, GridUnitType.Star) },
@@ -216,7 +234,7 @@ namespace MediandoUI
 		{
 
 			var home = new Button {
-				Text = Translation.Localize("HomeIcon"),
+				Text = Translation.Localize ("HomeIcon"),
 				FontSize = (Device.Idiom == TargetIdiom.Phone) 
 					? Device.GetNamedSize (NamedSize.Small, typeof(Button))
 					: Device.GetNamedSize (NamedSize.Large, typeof(Button)),
@@ -226,7 +244,7 @@ namespace MediandoUI
 
 			home.Clicked += (sender, args) => {
 				var masterPage = this.Parent.Parent as TabbedPage;
-				masterPage.Children [0].Title =  Translation.Localize ("StartIcon");
+				masterPage.Children [0].Title = Translation.Localize ("StartIcon");
 				masterPage.CurrentPage = masterPage.Children [0];
 			};
 
@@ -240,7 +258,7 @@ namespace MediandoUI
 			};
 
 			var library = new Button {
-				Text = Translation.Localize("LibraryIcon"),
+				Text = Translation.Localize ("LibraryIcon"),
 				FontSize = (Device.Idiom == TargetIdiom.Phone) 
 					? Device.GetNamedSize (NamedSize.Small, typeof(Button))
 					: Device.GetNamedSize (NamedSize.Large, typeof(Button)),
@@ -293,6 +311,7 @@ namespace MediandoUI
 				grid.WidthRequest = width;
 				if (listView != null) {
 					listView.WidthRequest = width;
+					listView.HeightRequest = height;
 				}
 				if (imageGrid != null) {
 					imageGrid.WidthRequest = width;
@@ -306,6 +325,13 @@ namespace MediandoUI
 				}
 			}
 		}
+
+//		protected override void OnDisappearing()
+//		{
+//			base.OnDisappearing();
+//			Content = null;
+//			GC.Collect(1);
+//		}
 	}
 }
 

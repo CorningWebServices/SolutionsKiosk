@@ -15,6 +15,7 @@ namespace MediandoUI
 		double screenwidth;
 		double screenheight;
 		LayoutType CurrentLayout;
+		public static MyDocumentsView Instance;
 
 		protected MyDocumentsViewModel ViewModel {
 			get { return BindingContext as MyDocumentsViewModel; }
@@ -23,13 +24,13 @@ namespace MediandoUI
 
 		public MyDocumentsView ()
 		{
-			NavigationPage.SetBackButtonTitle(this,Translation.Localize("BackButton"));
+			NavigationPage.SetBackButtonTitle (this, Translation.Localize ("BackButton"));
 			BindingContext = new MyDocumentsViewModel ();
 			ViewModel.IsRunning = true;
 			CurrentLayout = LayoutType.ListLayout;
 			SwitchLayouts (CurrentLayout);
 			AddToolBarItems ();
-
+			Instance = Instance;
 			this.BackgroundImage = ImageConstants.backgroundImage;
 		}
 
@@ -51,7 +52,7 @@ namespace MediandoUI
 					listView.ItemTapped += (sender, e) => {
 						var fileItem = (Downloads)e.Item;
 						var page = new DocumentDetails (fileItem);
-						this.Navigation.PushAsync (page,true);
+						this.Navigation.PushAsync (page, true);
 					};
 				}
 				contentLayout = new StackLayout {
@@ -62,17 +63,32 @@ namespace MediandoUI
 
 			} else {
 				if (imageGrid == null) {
-					imageGrid = new GridView {
-						RowSpacing = 5,
-						Padding = 5,
-						ColumnSpacing = 5,
-						WidthRequest = App.ScreenWidth,
-						HeightRequest = App.ScreenHeight,
-						ItemWidth = UIConstants.GetGridViewItemWidths (),
-						ItemHeight = UIConstants.GetGridViewItemHeights (),
-						ItemsSource = ViewModel.ImageFiles,
-						ItemTemplate = new DataTemplate (typeof(GridViewCellTemplate)),
-					};
+					Device.OnPlatform (iOS: () => {
+						imageGrid = new GridView {
+							RowSpacing = 5,
+							Padding = 5,
+							ColumnSpacing = 5,
+							WidthRequest = App.ScreenWidth,
+							HeightRequest = App.ScreenHeight,
+							ItemWidth = UIConstants.GetGridViewItemWidths (),
+							ItemHeight = UIConstants.GetGridViewItemHeights (),
+							ItemsSource = ViewModel.ImageFiles,
+							ItemTemplate = new DataTemplate (typeof(GridViewCellTemplate)),
+						};
+					},
+						Android: () => {
+							imageGrid = new GridView {
+								Padding = 20,
+								RowSpacing = 20,
+								ColumnSpacing = 20,
+								ItemWidth = 500,
+								ItemHeight = 732,
+								ItemsSource = ViewModel.ImageFiles,
+								ItemTemplate = new DataTemplate (typeof(DynamicDocsTemplateLayout)),
+								IsClippedToBounds = true,
+							};
+						});
+					
 
 					imageGrid.ItemSelected += (sender, e) => {
 						var fileItem = (Downloads)e.Value;
@@ -143,20 +159,17 @@ namespace MediandoUI
 		protected override void OnAppearing ()
 		{
 			base.OnAppearing ();
-			if(GlobalVariables.DocsLanguage == "British_English"){
+			if (GlobalVariables.DocsLanguage == "British_English") {
 				ToolbarItems.FirstOrDefault (i => i.Text == "LanguageFilter").Icon = ImageConstants.englishIcon;
-			}
-			else if(GlobalVariables.DocsLanguage == "German"){
+			} else if (GlobalVariables.DocsLanguage == "German") {
 				ToolbarItems.FirstOrDefault (i => i.Text == "LanguageFilter").Icon = ImageConstants.germanIcon;
-			}
-			else{
+			} else {
 				ToolbarItems.FirstOrDefault (i => i.Text == "LanguageFilter").Icon = ImageConstants.languageIcon;
 			}
 
-			if(GlobalVariables.DocsCategory == "All"){
+			if (GlobalVariables.DocsCategory == "All") {
 				ToolbarItems.FirstOrDefault (i => i.Text == "CategoryFilter").Icon = ImageConstants.flagIcon;
-			}
-			else{
+			} else {
 				ToolbarItems.FirstOrDefault (i => i.Text == "CategoryFilter").Icon = ImageConstants.filterIcon;
 			}
 			LoadDataAsync ();
@@ -171,9 +184,9 @@ namespace MediandoUI
 			ViewModel.IsRunning = false;
 		}
 
-		protected override void OnSizeAllocated(double width, double height)
+		protected override void OnSizeAllocated (double width, double height)
 		{
-			base.OnSizeAllocated(width, height); // Important!
+			base.OnSizeAllocated (width, height); // Important!
 			if (contentLayout.WidthRequest != width) {
 				screenwidth = width;
 				screenheight = height;

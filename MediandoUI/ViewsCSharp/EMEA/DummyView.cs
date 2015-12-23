@@ -17,22 +17,12 @@ namespace MediandoUI
 
 		public DummyView ()
 		{
+			
 			BindingContext = new BaseViewModel ();
 			//ViewModel.IsRunning = true;
 			NavigationPage.SetHasNavigationBar (this, false);
 			this.BackgroundImage = ImageConstants.backgroundImage;	
 
-			grid = new Grid {
-				VerticalOptions = LayoutOptions.Center,
-				HorizontalOptions = LayoutOptions.Center,
-				RowDefinitions = {
-					new RowDefinition { Height = GridLength.Auto },
-					new RowDefinition { Height = GridLength.Auto },
-				},
-				ColumnDefinitions = {
-					new ColumnDefinition { Width = new GridLength (1, GridUnitType.Star) },
-				}
-			};
 
 			var list = new ListView {
 				HasUnevenRows = true,
@@ -42,17 +32,54 @@ namespace MediandoUI
 			Device.OnPlatform 
 			(
 				iOS: () => { 
+					grid = new Grid {
+						VerticalOptions = LayoutOptions.Center,
+						HorizontalOptions = LayoutOptions.Center,
+						RowDefinitions = {
+							new RowDefinition { Height = GridLength.Auto },
+							new RowDefinition { Height = GridLength.Auto },
+						},
+						ColumnDefinitions = {
+							new ColumnDefinition { Width = new GridLength (1, GridUnitType.Star) },
+						}
+					};
+
 					grid.Children.Add (ControlUtilities.GetAppHeader (), 0, 0);
 					grid.Children.Add (list, 0, 1);
 					grid.Children.Add (CreateLoadingIndicator (), 0, 1);
 				},
 				Android: () => {
+
+					grid = new Grid {
+						VerticalOptions = LayoutOptions.Center,
+						HorizontalOptions = LayoutOptions.Center,
+						RowDefinitions = {
+							new RowDefinition { Height = GridLength.Auto },
+							//new RowDefinition { Height = GridLength.Auto },
+						},
+						ColumnDefinitions = {
+							new ColumnDefinition { Width = new GridLength (1, GridUnitType.Star) },
+						}
+					};
+
 					//grid.Children.Add (ControlUtilities.GetAppHeader (), 0, 0);
-					grid.Children.Add (list, 0, 1);
-					grid.Children.Add (CreateLoadingIndicator (), 0, 1);
+					grid.Children.Add (list, 0, 0);
+					grid.Children.Add (CreateLoadingIndicator (), 0, 0);
 				},
 				WinPhone: () => {
-					//grid.Children.Add (ControlUtilities.GetAppHeader (), 0, 0);
+					grid = new Grid {
+						VerticalOptions = LayoutOptions.Center,
+						HorizontalOptions = LayoutOptions.Center,
+						RowDefinitions = {
+							new RowDefinition { Height = GridLength.Auto },
+							new RowDefinition { Height = GridLength.Auto },
+						},
+						ColumnDefinitions = {
+							new ColumnDefinition { Width = new GridLength (1, GridUnitType.Star) },
+						}
+					};
+
+					grid.Children.Add (ControlUtilities.GetAppHeader (), 0, 0);
 					grid.Children.Add (list, 0, 1);
 					grid.Children.Add (CreateLoadingIndicator (), 0, 1);
 				}

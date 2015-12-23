@@ -102,18 +102,22 @@ namespace MediandoUI
 
 		//public static double FontSize
 		public static double GetThumbnailWidth ()
-		{
+		{ 
+			double width = 200;
+
 			if (Device.Idiom == TargetIdiom.Phone) {
 				if (App.CurrentDevice == IOSDevices.IPhone4S || App.CurrentDevice == IOSDevices.IPhone5 || App.CurrentDevice == IOSDevices.IPhone5S) {
-					return 110d;
+					width= 110d;
 				} else if (App.CurrentDevice == IOSDevices.IPhone6 || App.CurrentDevice == IOSDevices.IPhone6Plus) {
-					return 120d;
+					width=  120d;
 				} else {
-					return 120d;
+					width=  120d;
 				}
 			} else {
-				return 140d;
+				width=  140d;
 			}
+			return width;
+
 		}
 
 		public static double GetThumbnailHeight ()
@@ -179,32 +183,97 @@ namespace MediandoUI
 
 		public static double GetGridViewItemHeights ()
 		{
-			if (Device.Idiom == TargetIdiom.Phone) {
-				if (App.CurrentDevice == IOSDevices.IPhone4S || App.CurrentDevice == IOSDevices.IPhone5 || App.CurrentDevice == IOSDevices.IPhone5S) {
-					return 200d;
-				} else if (App.CurrentDevice == IOSDevices.IPhone6 || App.CurrentDevice == IOSDevices.IPhone6Plus) {
-					return 220d;
-				} else {
-					return 220d;
+			double width = 200;
+			Device.OnPlatform (
+				iOS: () => {
+					if (Device.Idiom == TargetIdiom.Phone) {
+						if (App.CurrentDevice == IOSDevices.IPhone4S || App.CurrentDevice == IOSDevices.IPhone5 || App.CurrentDevice == IOSDevices.IPhone5S) {
+							width=  200d;
+						} else if (App.CurrentDevice == IOSDevices.IPhone6 || App.CurrentDevice == IOSDevices.IPhone6Plus) {
+							width=  220d;
+						} else {
+							width=  220d;
+						}
+					} else {
+						width=  250d;
+					}
+				},
+				Android: () => {
+					if (Device.Idiom == TargetIdiom.Phone) {
+						if (App.CurrentDevice == IOSDevices.IPhone4S || App.CurrentDevice == IOSDevices.IPhone5 || App.CurrentDevice == IOSDevices.IPhone5S) {
+							width=  350d;
+						} else if (App.CurrentDevice == IOSDevices.IPhone6 || App.CurrentDevice == IOSDevices.IPhone6Plus) {
+							width=  550d;
+						} else {
+							width=  600d;
+						}
+					} else {
+						width=  650d;
+					}
+				},
+				WinPhone: () => {
+					if (Device.Idiom == TargetIdiom.Phone) {
+						if (App.CurrentDevice == IOSDevices.IPhone4S || App.CurrentDevice == IOSDevices.IPhone5 || App.CurrentDevice == IOSDevices.IPhone5S) {
+							width=  200d;
+						} else if (App.CurrentDevice == IOSDevices.IPhone6 || App.CurrentDevice == IOSDevices.IPhone6Plus) {
+							width=  220d;
+						} else {
+							width=  220d;
+						}
+					} else {
+						width=  250d;
+					}
 				}
-			} else {
-				return 250d;
-			}
+			);
+			return width;
+
 		}
 
 		public static double GetGridViewItemWidths ()
 		{
-			if (Device.Idiom == TargetIdiom.Phone) {
-				if (App.CurrentDevice == IOSDevices.IPhone4S || App.CurrentDevice == IOSDevices.IPhone5 || App.CurrentDevice == IOSDevices.IPhone5S) {
-					return 150;
-				} else if (App.CurrentDevice == IOSDevices.IPhone6 || App.CurrentDevice == IOSDevices.IPhone6Plus) {
-					return 160;
-				} else {
-					return 160;
+			double width = 200;
+			Device.OnPlatform (
+				iOS: () => {
+					if (Device.Idiom == TargetIdiom.Phone) {
+						if (App.CurrentDevice == IOSDevices.IPhone4S || App.CurrentDevice == IOSDevices.IPhone5 || App.CurrentDevice == IOSDevices.IPhone5S) {
+							width=  150;
+						} else if (App.CurrentDevice == IOSDevices.IPhone6 || App.CurrentDevice == IOSDevices.IPhone6Plus) {
+							width=  160;
+						} else {
+							width=  160;
+						}
+					} else {
+						width=  170;
+					}
+				},
+				Android: () => {
+					if (Device.Idiom == TargetIdiom.Phone) {
+						if (App.CurrentDevice == IOSDevices.IPhone4S || App.CurrentDevice == IOSDevices.IPhone5 || App.CurrentDevice == IOSDevices.IPhone5S) {
+							width=  300;
+						} else if (App.CurrentDevice == IOSDevices.IPhone6 || App.CurrentDevice == IOSDevices.IPhone6Plus) {
+							width=  500;
+						} else {
+							width=  550;
+						}
+					} else {
+						width=  550;
+					}
+				},
+				WinPhone: () => {
+					if (Device.Idiom == TargetIdiom.Phone) {
+						if (App.CurrentDevice == IOSDevices.IPhone4S || App.CurrentDevice == IOSDevices.IPhone5 || App.CurrentDevice == IOSDevices.IPhone5S) {
+							width=  150;
+						} else if (App.CurrentDevice == IOSDevices.IPhone6 || App.CurrentDevice == IOSDevices.IPhone6Plus) {
+							width=  160;
+						} else {
+							width=  160;
+						}
+					} else {
+						width=  170;
+					}
 				}
-			} else {
-				return 170;
-			}
+			);
+			return width;
 		}
 
 		public static double GetGridViewFontSize ()

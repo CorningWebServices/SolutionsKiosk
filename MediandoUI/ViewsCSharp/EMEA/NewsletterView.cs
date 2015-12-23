@@ -3,6 +3,7 @@ using Xamarin.Forms;
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
+using FFImageLoading.Forms;
 
 namespace MediandoUI
 {
@@ -13,6 +14,7 @@ namespace MediandoUI
 		GridView imageGrid;
 		Grid grid;
 		LayoutType CurrentLayout;
+		public static NewsletterView Instance;
 
 		protected NewsLetterViewModel ViewModel {
 			get { return BindingContext as NewsLetterViewModel; }
@@ -24,7 +26,7 @@ namespace MediandoUI
 			NavigationPage.SetBackButtonTitle (this, Translation.Localize ("BackButton"));
 			BindingContext = new NewsLetterViewModel ();
 			ViewModel.IsRunning = true;
-
+			Instance = this;
 	
 			CurrentLayout = LayoutType.ListLayout;
 			SwitchLayouts (CurrentLayout);
@@ -48,24 +50,62 @@ namespace MediandoUI
 					listView.ItemsSource = ViewModel.Files;
 					listView.BackgroundColor = Color.Transparent;
 
+
 					listView.ItemTapped += (sender, e) => {
-						var currentItem = (ProductCatalog)e.Item;
-						var fileItem = ViewModel.Files.ToList ().FirstOrDefault (i => i.Id == currentItem.Id);
-						var page = new DetailsPopup (fileItem, LibraryType.NewsLetter);
-						this.Navigation.PushAsync (page, true);
+						((ListView)sender).SelectedItem = null;
 					};
+
+					listView.ItemSelected += (sender, e) => {
+						if (e.SelectedItem == null)
+							return;
+
+						var currentItem = (ProductCatalog)e.SelectedItem;
+						var page = new DetailsPopup (currentItem, LibraryType.NewsLetter);
+						this.Navigation.PushAsync (page, false);
+					};
+
 				}
 
-				grid = new Grid {
-					VerticalOptions = LayoutOptions.Center,
-					HorizontalOptions = LayoutOptions.Center,
-					RowDefinitions = {
-						new RowDefinition { Height = GridLength.Auto },
+				Device.OnPlatform 
+				(
+					iOS: () => { 
+						grid = new Grid {
+							VerticalOptions = LayoutOptions.Center,
+							HorizontalOptions = LayoutOptions.Center,
+							RowDefinitions = {
+								new RowDefinition { Height = GridLength.Auto },
+							},
+							ColumnDefinitions = {
+								new ColumnDefinition { Width = new GridLength (1, GridUnitType.Star) },
+							}
+						};
 					},
-					ColumnDefinitions = {
-						new ColumnDefinition { Width = new GridLength (1, GridUnitType.Star) },
+					Android: () => {
+						grid = new Grid {
+							VerticalOptions = LayoutOptions.StartAndExpand,
+							HorizontalOptions = LayoutOptions.Center,
+							RowDefinitions = {
+								new RowDefinition { Height = new GridLength (1, GridUnitType.Star) },
+							},
+							ColumnDefinitions = {
+								new ColumnDefinition { Width = new GridLength (1, GridUnitType.Star) },
+							}
+						};
+					},
+					WinPhone: () => {
+						grid = new Grid {
+							VerticalOptions = LayoutOptions.Center,
+							HorizontalOptions = LayoutOptions.Center,
+							RowDefinitions = {
+								new RowDefinition { Height = GridLength.Auto },
+							},
+							ColumnDefinitions = {
+								new ColumnDefinition { Width = new GridLength (1, GridUnitType.Star) },
+							}
+						};
 					}
-				};
+				);
+
 
 				grid.Children.Add (listView, 0, 0);
 				grid.Children.Add (CreateLoadingIndicator (), 0, 0);
@@ -73,17 +113,33 @@ namespace MediandoUI
 				this.Content = grid;
 			} else {
 				if (imageGrid == null) {
-					imageGrid = new GridView {
-						RowSpacing = 5,
-						Padding = 5,
-						ColumnSpacing = 5,
-						WidthRequest = App.ScreenWidth - 20,
-						HeightRequest = App.ScreenHeight,
-						ItemWidth = UIConstants.GetGridViewItemWidths (),
-						ItemHeight = UIConstants.GetGridViewItemHeights (),
-						ItemsSource = ViewModel.ImageFiles,
-						ItemTemplate = new DataTemplate (typeof(GridViewCellTemplate)),
-					};
+					Device.OnPlatform (iOS: () => {
+						imageGrid = new GridView {
+							RowSpacing = 5,
+							Padding = 5,
+							ColumnSpacing = 5,
+							WidthRequest = App.ScreenWidth - 20,
+							HeightRequest = App.ScreenHeight,
+							ItemWidth = UIConstants.GetGridViewItemWidths (),
+							ItemHeight = UIConstants.GetGridViewItemHeights (),
+							ItemsSource = ViewModel.ImageFiles,
+							ItemTemplate = new DataTemplate (typeof(GridViewCellTemplate)),
+						};
+					},
+						Android: () => {
+							imageGrid = new GridView {
+								Padding = 20,
+								RowSpacing = 20,
+								ColumnSpacing = 20,
+								ItemWidth = 500,
+								ItemHeight = 732,
+								ItemsSource = ViewModel.ImageFiles,
+								ItemTemplate = new DataTemplate (typeof(DynamicNewsLetterTemplateLayout)),
+								IsClippedToBounds = true,
+							};
+						});
+
+
 
 					imageGrid.ItemSelected += (sender, e) => {
 						var currentItem = (ProductCatalog)e.Value;
@@ -91,6 +147,8 @@ namespace MediandoUI
 						var page = new DetailsPopup (fileItem, LibraryType.NewsLetter);
 						Navigation.PushAsync (page, true);
 					};
+
+
 
 				}
 				grid = new Grid {
@@ -192,6 +250,7 @@ namespace MediandoUI
 				grid.WidthRequest = width;
 				if (listView != null) {
 					listView.WidthRequest = width;
+					listView.HeightRequest = height;
 				}
 				if (imageGrid != null) {
 					imageGrid.WidthRequest = width;
@@ -206,6 +265,4 @@ namespace MediandoUI
 			}
 		}
 	}
-
 }
-

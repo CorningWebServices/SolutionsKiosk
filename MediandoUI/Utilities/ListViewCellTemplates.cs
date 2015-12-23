@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using FFImageLoading.Forms;
+using System.Collections.Generic;
 
 
 namespace MediandoUI
@@ -121,10 +122,10 @@ namespace MediandoUI
 	{
 		public object Convert (object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			if (((string)value).ToLower() == "videos") {
-				return Translation.Localize("PlayOnlineText"); 
+			if (((string)value).ToLower () == "videos") {
+				return Translation.Localize ("PlayOnlineText"); 
 			} else {
-				return Translation.Localize("ReadOnlineText");
+				return Translation.Localize ("ReadOnlineText");
 			}
 		}
 
@@ -138,10 +139,10 @@ namespace MediandoUI
 	{
 		public object Convert (object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			if (((string)value).ToLower() == "videos") {
+			if (((string)value).ToLower () == "videos") {
 				return Translation.Localize ("PlayOfflineText");
 			} else {
-				return Translation.Localize("ReadOfflineText");
+				return Translation.Localize ("ReadOfflineText");
 			}
 		}
 
@@ -155,7 +156,7 @@ namespace MediandoUI
 	{
 		public object Convert (object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			if (string.IsNullOrWhiteSpace(value == null ? "" : value.ToString())) {
+			if (string.IsNullOrWhiteSpace (value == null ? "" : value.ToString ())) {
 				return Translation.Localize ("DownloadText");
 			} else {
 				return Translation.Localize ("DeleteText");
@@ -219,22 +220,22 @@ namespace MediandoUI
 //			};
 //			thumbnailImage.SetBinding (Image.SourceProperty, new Binding ("ThumbPath", converter: new NoCacheConverter ()));
 
-			var thumbnailImage = new CachedImage() {
+			var thumbnailImage = new CachedImage () {
 				HorizontalOptions = LayoutOptions.CenterAndExpand,
 				VerticalOptions = LayoutOptions.CenterAndExpand,
 				WidthRequest = UIConstants.GetGridViewItemWidths (),
 				HeightRequest = UIConstants.GetGridViewItemHeights () - 40,
 				BackgroundColor = ColorConstants.SemiOpaqueBackground,
 
-				CacheDuration = TimeSpan.FromDays(30),
-				DownsampleHeight = UIConstants.GetThumbnailHeight ()-100,
+				CacheDuration = TimeSpan.FromDays (30),
+				DownsampleHeight = UIConstants.GetThumbnailHeight () - 100,
 				RetryCount = 3,
 				RetryDelay = 250,
 				TransparencyEnabled = false,
 				// Shown after loading error occurs:
-				ErrorPlaceholder = "corningimages/loading.png",
+				ErrorPlaceholder = Device.OnPlatform (iOS: "corningimages/loading.png", Android: "loading.png", WinPhone: "loading.png"),
 				// Shown before targe image is loaded:
-				LoadingPlaceholder = "corningimages/loading.png",
+				LoadingPlaceholder = Device.OnPlatform (iOS: "corningimages/loading.png", Android: "loading.png", WinPhone: "loading.png"),
 			};
 
 			thumbnailImage.SetBinding (CachedImage.SourceProperty, new Binding ("ThumbPath", converter: new NoCacheConverter ()));
@@ -250,15 +251,32 @@ namespace MediandoUI
 			};
 			titleLabel.SetBinding (Label.TextProperty, "FileName");
 
-			this.View = new StackLayout {
-				WidthRequest = UIConstants.GetGridViewItemWidths (),
-				HeightRequest = UIConstants.GetGridViewItemHeights (),
-				Orientation = StackOrientation.Vertical,
-				Children = {
-					thumbnailImage,
-					titleLabel
+
+
+			Device.OnPlatform (
+				iOS: () => {
+					this.View = new StackLayout {
+						WidthRequest = UIConstants.GetGridViewItemWidths (),
+						HeightRequest = UIConstants.GetGridViewItemHeights (),
+						Orientation = StackOrientation.Vertical,
+						Children = {
+							thumbnailImage,
+							titleLabel
+						}
+					};
+				},
+				Android: () => {
+					this.View = new AbsoluteLayout {
+						WidthRequest = UIConstants.GetGridViewItemWidths (),
+						HeightRequest = UIConstants.GetGridViewItemHeights (),
+						//Orientation = StackOrientation.Vertical,
+						Children = {
+							thumbnailImage,
+							titleLabel
+						}
+					};
 				}
-			};
+			);
 		}
 	}
 
@@ -280,7 +298,6 @@ namespace MediandoUI
 				FontAttributes = FontAttributes.Bold,
 				HorizontalOptions = LayoutOptions.Start,
 				VerticalOptions = LayoutOptions.StartAndExpand,
-				LineBreakMode = LineBreakMode.TailTruncation,
 			};
 			nameLabel.SetBinding (Label.TextProperty, "FileName");
 
@@ -289,26 +306,29 @@ namespace MediandoUI
 				TextColor = Color.White,
 				HorizontalOptions = LayoutOptions.Start,
 				VerticalOptions = LayoutOptions.StartAndExpand,
-				LineBreakMode = LineBreakMode.TailTruncation,
 			};
 			descriptionLabel.SetBinding (Label.TextProperty, "Description");
 
-			var thumbnailImage = new CachedImage() {
+			Device.OnPlatform (iOS: () => {
+				nameLabel.LineBreakMode = LineBreakMode.TailTruncation;
+				descriptionLabel.LineBreakMode = LineBreakMode.TailTruncation;
+			});
+
+			var thumbnailImage = new CachedImage () {
 				HorizontalOptions = LayoutOptions.StartAndExpand,
 				VerticalOptions = LayoutOptions.StartAndExpand,
 				HeightRequest = UIConstants.GetThumbnailHeight (),
 				WidthRequest = UIConstants.GetThumbnailWidth (),
 				BackgroundColor = ColorConstants.SemiOpaqueBackground,
 
-				CacheDuration = TimeSpan.FromDays(30),
-				DownsampleHeight = UIConstants.GetThumbnailHeight ()-100,
+				CacheDuration = TimeSpan.FromDays (30),
+				DownsampleHeight = UIConstants.GetThumbnailHeight () - 100,
 				RetryCount = 3,
 				RetryDelay = 250,
 				TransparencyEnabled = false,
-				// Shown after loading error occurs:
-				ErrorPlaceholder = "corningimages/loading.png",
-				// Shown before targe image is loaded:
-				LoadingPlaceholder = "corningimages/loading.png",
+				ErrorPlaceholder = Device.OnPlatform (iOS: "corningimages/loading.png", Android: "loading.png", WinPhone: "loading.png"),
+				LoadingPlaceholder = Device.OnPlatform (iOS: "corningimages/loading.png", Android: "loading.png", WinPhone: "loading.png")
+
 			};
 
 			thumbnailImage.SetBinding (CachedImage.SourceProperty, new Binding ("ThumbPath", converter: new NoCacheConverter ()));
@@ -340,14 +360,23 @@ namespace MediandoUI
 
 				var fileItem = (Downloads)btn.CommandParameter;
 
-				var pdfService = DependencyService.Get<IPdfService> ();
-				if (pdfService == null)
-					return;
 
 				if (fileItem.MimeType.StartsWith ("mp4")) {
-					var page = (Page)Activator.CreateInstance (typeof(DownloadViewer), fileItem);
-					this.ParentView.Navigation.PushAsync (page, true);
+					Device.OnPlatform (
+						iOS: () => {
+							var page = (Page)Activator.CreateInstance (typeof(DownloadViewer), fileItem);
+							this.ParentView.Navigation.PushAsync (page, true);
+						},
+						Android: () => {
+							var page = (Page)Activator.CreateInstance (typeof(AndroidVideoPlayer), fileItem);
+							this.ParentView.Navigation.PushAsync (page, true);
+						}
+					);
 				} else {
+					var pdfService = DependencyService.Get<IPdfService> ();
+					if (pdfService == null)
+						return;
+
 					pdfService.OpenPDF (LibraryType.MyDocuments, fileItem.FilePath, fileItem.FileName, 0, null);
 				}
 
@@ -377,12 +406,9 @@ namespace MediandoUI
 					? Translation.Localize ("DeleteVideoMessage")
 					: Translation.Localize ("DeleteDocumentMessage");
 
-
-
 				var confirm = await parent.DisplayAlert ("", textToDisplay, Translation.Localize ("Yes"), Translation.Localize ("No"));
 
 				if (confirm) {
-
 					var deleteService = DependencyService.Get<IDeleteService> ();
 					if (deleteService == null)
 						return;
@@ -392,9 +418,7 @@ namespace MediandoUI
 							var ViewModel = (MyDocumentsViewModel)this.Parent.BindingContext;
 							ViewModel.DocFileID = fileItem.Id;
 							ViewModel.DeleteDocumentsCommand.Execute (null);
-							//downloadLabel.Text = "";
 						}
-						//download.IsEnabled = true;
 					});
 
 				}
@@ -461,13 +485,26 @@ namespace MediandoUI
 				BackgroundColor = Color.FromRgba (255, 255, 255, 0.1),
 				VerticalOptions = LayoutOptions.Center,
 				Padding = 5,
-				Content = new StackLayout {
-					Padding = 0,
-					Children = {
-						grid
-					}
-				}
 			};
+
+			Device.OnPlatform (
+				iOS: () => {
+					frame.Content = new StackLayout {
+						Padding = 0,
+						Children = {
+							grid
+						}
+					};
+				},
+				Android: () => {
+					frame.Content = new AbsoluteLayout {
+						Padding = 0,
+						Children = {
+							grid
+						}
+					};
+				}
+			);
 
 			this.View = frame;
 		}
@@ -491,7 +528,6 @@ namespace MediandoUI
 				FontAttributes = FontAttributes.Bold,
 				HorizontalOptions = LayoutOptions.Start,
 				VerticalOptions = LayoutOptions.StartAndExpand,
-				LineBreakMode = LineBreakMode.TailTruncation,
 			};
 			nameLabel.SetBinding (Label.TextProperty, "FileName");
 
@@ -500,26 +536,28 @@ namespace MediandoUI
 				TextColor = Color.White,
 				HorizontalOptions = LayoutOptions.Start,
 				VerticalOptions = LayoutOptions.StartAndExpand,
-				LineBreakMode = LineBreakMode.TailTruncation,
 			};
 			descriptionLabel.SetBinding (Label.TextProperty, "Description");
 
-			var thumbnailImage = new CachedImage() {
+			Device.OnPlatform (iOS: () => {
+				nameLabel.LineBreakMode = LineBreakMode.TailTruncation;
+				descriptionLabel.LineBreakMode = LineBreakMode.TailTruncation;
+			});
+
+			var thumbnailImage = new CachedImage () {
 				HorizontalOptions = LayoutOptions.StartAndExpand,
 				VerticalOptions = LayoutOptions.StartAndExpand,
 				HeightRequest = UIConstants.GetThumbnailHeight (),
 				WidthRequest = UIConstants.GetThumbnailWidth (),
 				BackgroundColor = ColorConstants.SemiOpaqueBackground,
 
-				CacheDuration = TimeSpan.FromDays(30),
-				DownsampleHeight = UIConstants.GetThumbnailHeight ()-100,
+				CacheDuration = TimeSpan.FromDays (30),
+				DownsampleHeight = UIConstants.GetThumbnailHeight () - 100,
 				RetryCount = 3,
 				RetryDelay = 250,
 				TransparencyEnabled = false,
-				// Shown after loading error occurs:
-				ErrorPlaceholder = "corningimages/loading.png",
-				// Shown before targe image is loaded:
-				LoadingPlaceholder = "corningimages/loading.png",
+				ErrorPlaceholder = Device.OnPlatform (iOS: "corningimages/loading.png", Android: "loading.png", WinPhone: "loading.png"),
+				LoadingPlaceholder = Device.OnPlatform (iOS: "corningimages/loading.png", Android: "loading.png", WinPhone: "loading.png")
 			};
 
 			thumbnailImage.SetBinding (CachedImage.SourceProperty, new Binding ("ThumbPath", converter: new NoCacheConverter ()));
@@ -553,14 +591,25 @@ namespace MediandoUI
 				var currentItem = (ProductCatalog)btn.CommandParameter;
 				var fileItem = ViewModel.Files.ToList ().FirstOrDefault (i => i.Id == currentItem.Id);
 
-				var pdfService = DependencyService.Get<IPdfService> ();
-				if (pdfService == null)
-					return;
+
 
 				if (fileItem.MimeType.StartsWith ("mp4")) {
-					var page = (Page)Activator.CreateInstance (typeof(VideoView), fileItem);
-						this.ParentView.Navigation.PushAsync (page, true);
+					Device.OnPlatform (
+						iOS: () => {
+							var page = (Page)Activator.CreateInstance (typeof(VideoView), fileItem);
+							this.ParentView.Navigation.PushAsync (page, true);
+						},
+						Android: () => {
+							var page = (Page)Activator.CreateInstance (typeof(AndroidVideoPlayer), fileItem);
+							this.ParentView.Navigation.PushAsync (page, true);
+						}
+					);
+
 				} else {
+					var pdfService = DependencyService.Get<IPdfService> ();
+					if (pdfService == null)
+						return;
+					
 					if (fileItem.CategoryCode == "newsletter") {
 						pdfService.OpenPDF (LibraryType.NewsLetter, fileItem.FilePath, fileItem.FileName, 0, null);
 					} else {
@@ -574,7 +623,7 @@ namespace MediandoUI
 
 			//Download Button
 			var download = new Button () {
-				Text = Translation.Localize("DownloadText"),
+				Text = Translation.Localize ("DownloadText"),
 				HorizontalOptions = LayoutOptions.CenterAndExpand,
 				VerticalOptions = LayoutOptions.Center,
 				BackgroundColor = Color.FromHex ("#006699"),
@@ -604,8 +653,8 @@ namespace MediandoUI
 
 					var textToDisplay = 
 						currentItem.MimeType.StartsWith ("mp4")
-						? Translation.Localize("DownloadVideoMessage")
-						: Translation.Localize("DownloadDocumentMessage");
+						? Translation.Localize ("DownloadVideoMessage")
+						: Translation.Localize ("DownloadDocumentMessage");
 
 
 
@@ -621,12 +670,12 @@ namespace MediandoUI
 								fileItem.FilePath = filePath;
 								fileItem.ThumbPath = filePath.Replace (".pdf", ".jpeg").Replace (".mp4", ".jpeg");
 								if (fileItem.MimeType.StartsWith ("mp4"))
-									readOnline.Text = Translation.Localize("PlayOfflineText");
+									readOnline.Text = Translation.Localize ("PlayOfflineText");
 								else
-									readOnline.Text = Translation.Localize("ReadOfflineText");
+									readOnline.Text = Translation.Localize ("ReadOfflineText");
 
-								download.Text = Translation.Localize("DeleteText");
-								downloadLabel.Text = DateTime.Now.ToString("d");
+								download.Text = Translation.Localize ("DeleteText");
+								downloadLabel.Text = DateTime.Now.ToString ("d");
 								ViewModel.fileItem = fileItem;
 								ViewModel.InsertDocumentsCommand.Execute (null);
 							}
@@ -635,14 +684,13 @@ namespace MediandoUI
 				} else {
 					var textToDisplay = 
 						currentItem.MimeType.StartsWith ("mp4")
-						? Translation.Localize("DeleteVideoMessage")
-						: Translation.Localize("DeleteDocumentMessage");
+						? Translation.Localize ("DeleteVideoMessage")
+						: Translation.Localize ("DeleteDocumentMessage");
 
 
 
-					var confirm = await parent.DisplayAlert ("", textToDisplay, Translation.Localize("Yes"), Translation.Localize("No"));
-					if(confirm)
-					{
+					var confirm = await parent.DisplayAlert ("", textToDisplay, Translation.Localize ("Yes"), Translation.Localize ("No"));
+					if (confirm) {
 						var deleteService = DependencyService.Get<IDeleteService> ();
 						if (deleteService == null)
 							return;
@@ -650,11 +698,11 @@ namespace MediandoUI
 						deleteService.DeleteFile (fileItem.FilePath, (bool completed) => {
 							if (completed == true) {
 								if (fileItem.MimeType.StartsWith ("mp4"))
-									readOnline.Text = Translation.Localize("PlayOnlineText");
+									readOnline.Text = Translation.Localize ("PlayOnlineText");
 								else
-									readOnline.Text = Translation.Localize("ReadOnlineText");
+									readOnline.Text = Translation.Localize ("ReadOnlineText");
 
-								download.Text = Translation.Localize("DownloadText");
+								download.Text = Translation.Localize ("DownloadText");
 								downloadLabel.Text = "";
 								ViewModel.DocFileID = fileItem.Id;
 								ViewModel.DeleteDocumentsCommand.Execute (null);
@@ -728,15 +776,27 @@ namespace MediandoUI
 				HorizontalOptions = LayoutOptions.Center,
 				BackgroundColor = Color.FromRgba (255, 255, 255, 0.1),
 				VerticalOptions = LayoutOptions.Center,
-				Padding = 5,
-				Content = new StackLayout {
-					Padding = 0,
-					Children = {
-						grid
-					}
-				}
+				Padding = 5
 			};
 
+			Device.OnPlatform (
+				iOS: () => {
+					frame.Content = new StackLayout {
+						Padding = 0,
+						Children = {
+							grid
+						}
+					};
+				},
+				Android: () => {
+					frame.Content = new AbsoluteLayout {
+						Padding = 0,
+						Children = {
+							grid
+						}
+					};
+				}
+			);
 			this.View = frame;
 		}
 	}
@@ -758,7 +818,7 @@ namespace MediandoUI
 				FontAttributes = FontAttributes.Bold,
 				HorizontalOptions = LayoutOptions.Start,
 				VerticalOptions = LayoutOptions.StartAndExpand,
-				LineBreakMode = LineBreakMode.TailTruncation,
+				//LineBreakMode = LineBreakMode.TailTruncation,
 			};
 			nameLabel.SetBinding (Label.TextProperty, "FileName");
 
@@ -767,19 +827,33 @@ namespace MediandoUI
 				TextColor = Color.White,
 				HorizontalOptions = LayoutOptions.Start,
 				VerticalOptions = LayoutOptions.StartAndExpand,
-				LineBreakMode = LineBreakMode.TailTruncation,
+				//LineBreakMode = LineBreakMode.TailTruncation,
 			};
 			descriptionLabel.SetBinding (Label.TextProperty, "Description");
 
-
-			var thumbnailImage = new Image () {
+			Device.OnPlatform (iOS: () => {
+				nameLabel.LineBreakMode = LineBreakMode.TailTruncation;
+				descriptionLabel.LineBreakMode = LineBreakMode.TailTruncation;
+			});
+				
+			var thumbnailImage = new CachedImage () {
 				HorizontalOptions = LayoutOptions.StartAndExpand,
 				VerticalOptions = LayoutOptions.StartAndExpand,
 				HeightRequest = UIConstants.GetThumbnailHeight (),
 				WidthRequest = UIConstants.GetThumbnailWidth (),
 				BackgroundColor = ColorConstants.SemiOpaqueBackground,
+
+				CacheDuration = TimeSpan.FromDays (30),
+				DownsampleHeight = UIConstants.GetThumbnailHeight () - 100,
+				RetryCount = 3,
+				RetryDelay = 250,
+				TransparencyEnabled = false,
+				ErrorPlaceholder = Device.OnPlatform (iOS: "corningimages/loading.png", Android: "loading.png", WinPhone: "loading.png"),
+				LoadingPlaceholder = Device.OnPlatform (iOS: "corningimages/loading.png", Android: "loading.png", WinPhone: "loading.png")
+
 			};
-			thumbnailImage.SetBinding (Image.SourceProperty, new Binding ("ThumbPath", converter: new NoCacheConverter ()));
+
+			thumbnailImage.SetBinding (CachedImage.SourceProperty, new Binding ("ThumbPath", converter: new NoCacheConverter ()));
 
 			var downloadLabel = new Label () {
 				FontSize = (Device.Idiom == TargetIdiom.Phone) 
@@ -814,23 +888,19 @@ namespace MediandoUI
 				if (pdfService == null)
 					return;
 
-				if (fileItem.MimeType.StartsWith ("mp4")) {
-					var page = (Page)Activator.CreateInstance (typeof(VideoView), fileItem);
-					this.ParentView.Navigation.PushAsync (page, true);
-				} else {
-					if (fileItem.CategoryCode == "newsletter") {
-						pdfService.OpenPDF (LibraryType.NewsLetter, fileItem.FilePath, fileItem.FileName, 0, null);
-					} else {
-						pdfService.OpenPDF (LibraryType.All, fileItem.FilePath, fileItem.FileName, 0, null);
 
-					}
+				if (fileItem.CategoryCode == "newsletter") {
+					pdfService.OpenPDF (LibraryType.NewsLetter, fileItem.FilePath, fileItem.FileName, 0, null);
+				} else {
+					pdfService.OpenPDF (LibraryType.All, fileItem.FilePath, fileItem.FileName, 0, null);
+
 				}
 
 			};
 
 			//Download Button
 			var download = new Button () {
-				Text = Translation.Localize("DownloadText"),
+				Text = Translation.Localize ("DownloadText"),
 				HorizontalOptions = LayoutOptions.CenterAndExpand,
 				VerticalOptions = LayoutOptions.Center,
 				BackgroundColor = Color.FromHex ("#006699"),
@@ -854,19 +924,19 @@ namespace MediandoUI
 
 					if (GlobalVariables.WifiDownloadOnly) {
 						if (!App.IsWifiReachable ()) {
-							await parent.DisplayAlert ("", GlobalVariables.WifiConnectionOnlyAlert, Translation.Localize("Ok"));
+							await parent.DisplayAlert ("", GlobalVariables.WifiConnectionOnlyAlert, Translation.Localize ("Ok"));
 							return;
 						}
 					}
 
 					var textToDisplay = 
 						currentItem.MimeType.StartsWith ("mp4") 
-						? Translation.Localize("DownloadVideoMessage")
-						: Translation.Localize("DownloadDocumentMessage");
+						? Translation.Localize ("DownloadVideoMessage")
+						: Translation.Localize ("DownloadDocumentMessage");
 
 
 
-					var confirm = await parent.DisplayAlert ("", textToDisplay, Translation.Localize("Yes"), Translation.Localize("No"));
+					var confirm = await parent.DisplayAlert ("", textToDisplay, Translation.Localize ("Yes"), Translation.Localize ("No"));
 
 					if (confirm) {
 						var pdfService = DependencyService.Get<IDownloadService> ();
@@ -878,12 +948,12 @@ namespace MediandoUI
 								fileItem.FilePath = filePath;
 								fileItem.ThumbPath = filePath.Replace (".pdf", ".jpeg").Replace (".mp4", ".jpeg");
 								if (fileItem.MimeType.StartsWith ("mp4"))
-									readOnline.Text = Translation.Localize("PlayOfflineText");
+									readOnline.Text = Translation.Localize ("PlayOfflineText");
 								else
-									readOnline.Text = Translation.Localize("ReadOfflineText");
+									readOnline.Text = Translation.Localize ("ReadOfflineText");
 								//
-								download.Text = Translation.Localize("DeleteText");
-								downloadLabel.Text = DateTime.Now.ToString("d");
+								download.Text = Translation.Localize ("DeleteText");
+								downloadLabel.Text = DateTime.Now.ToString ("d");
 								ViewModel.fileItem = fileItem;
 								ViewModel.InsertDocumentsCommand.Execute (null);
 							}
@@ -891,9 +961,9 @@ namespace MediandoUI
 					}
 				} else {
 					var textToDisplay = currentItem.MimeType.StartsWith ("mp4") 
-						? Translation.Localize("DeleteVideoMessage")
-						: Translation.Localize("DeleteDocumentMessage");
-					var confirm = await parent.DisplayAlert ("", textToDisplay, Translation.Localize("Yes"), Translation.Localize("No"));
+						? Translation.Localize ("DeleteVideoMessage")
+						: Translation.Localize ("DeleteDocumentMessage");
+					var confirm = await parent.DisplayAlert ("", textToDisplay, Translation.Localize ("Yes"), Translation.Localize ("No"));
 					if (confirm) {
 						var deleteService = DependencyService.Get<IDeleteService> ();
 						if (deleteService == null)
@@ -903,11 +973,11 @@ namespace MediandoUI
 							if (completed == true) {
 
 								if (fileItem.MimeType.StartsWith ("mp4"))
-									readOnline.Text = Translation.Localize("PlayOnlineText");
+									readOnline.Text = Translation.Localize ("PlayOnlineText");
 								else
-									readOnline.Text = Translation.Localize("ReadOnlineText");
+									readOnline.Text = Translation.Localize ("ReadOnlineText");
 								//
-								download.Text = Translation.Localize("DownloadText");
+								download.Text = Translation.Localize ("DownloadText");
 								downloadLabel.Text = "";
 								ViewModel.DocFileID = fileItem.Id;
 								ViewModel.DeleteDocumentsCommand.Execute (null);
@@ -919,17 +989,7 @@ namespace MediandoUI
 
 			};
 
-			Grid grid = new Grid {
-				Padding = 5,
-				VerticalOptions = LayoutOptions.Center,
-				RowDefinitions = {
-					new RowDefinition { Height = GridLength.Auto },
-				},
-				ColumnDefinitions = {
-					new ColumnDefinition { Width = GridLength.Auto },
-					new ColumnDefinition { Width = new GridLength (1, GridUnitType.Star) },
-				}
-			};
+
 
 			Grid details = new Grid {
 				Padding = 5,
@@ -970,6 +1030,18 @@ namespace MediandoUI
 			leftdetails.Children.Add (thumbnailImage, 0, 0);
 			leftdetails.Children.Add (downloadLabel, 0, 1);
 
+
+			Grid grid = new Grid {
+				Padding = 5,
+				VerticalOptions = LayoutOptions.Center,
+				RowDefinitions = {
+					new RowDefinition { Height = GridLength.Auto },
+				},
+				ColumnDefinitions = {
+					new ColumnDefinition { Width = GridLength.Auto },
+					new ColumnDefinition { Width = new GridLength (1, GridUnitType.Star) },
+				}
+			};
 			grid.Children.Add (leftdetails, 0, 0);
 			grid.Children.Add (details, 1, 0);
 
@@ -979,18 +1051,218 @@ namespace MediandoUI
 				HasShadow = true,
 				HorizontalOptions = LayoutOptions.Center,
 				BackgroundColor = Color.FromRgba (255, 255, 255, 0.1),
-				VerticalOptions = LayoutOptions.Center,
-				Padding = 5,
-				Content = new StackLayout {
-					Padding = 0,
-					Children = {
-						grid
-					}
+				VerticalOptions = LayoutOptions.StartAndExpand,
+				Padding = 5
+			};
+
+			Device.OnPlatform (
+				iOS: () => {
+					frame.Content = new StackLayout {
+						Padding = 0,
+						Children = {
+							grid
+						}
+					};
+				},
+				Android: () => {
+					frame.Content = new AbsoluteLayout {
+						Padding = 0,
+						Children = {
+							grid
+						}
+					};
+				}
+			);
+			this.View = frame;
+		}
+	}
+
+	public class DynamicLibraryTemplateLayout : ViewCell
+	{
+		protected override void OnBindingContextChanged ()
+		{
+			base.OnBindingContextChanged ();
+
+			dynamic c = BindingContext;
+
+			// TODO: Fix book item vertical scroll issue - RowHeight - 1  = No Scroll
+
+			var itemView = new ListView {
+				//BackgroundColor = Color.Lime,
+				ItemsSource = new List<dynamic> { c },
+				ItemTemplate = new DataTemplate (typeof(ListTemplateLayout)),
+				HasUnevenRows = false,
+				IsPullToRefreshEnabled = false,
+				HeightRequest = 244,
+				VerticalOptions = LayoutOptions.FillAndExpand,
+				SeparatorVisibility = SeparatorVisibility.None,
+				InputTransparent = true,
+				RowHeight = 243
+			};
+					
+			itemView.ItemTapped += (sender, e) => {
+				((ListView)sender).SelectedItem = null;
+			};
+
+			itemView.ItemSelected += (sender, e) => {
+				if (e.SelectedItem == null)
+					return;
+
+				var currentItem = (ProductCatalog)e.SelectedItem;
+				var page = new DetailsPopup (currentItem, LibraryType.All);
+				LibraryDetailsView.Instance.Navigation.PushAsync (page, false);
+			};
+
+			View = itemView;
+		}
+	}
+
+	public class DynamicNewsLetterTemplateLayout : ViewCell
+	{
+		protected override void OnBindingContextChanged ()
+		{
+			base.OnBindingContextChanged ();
+
+			dynamic c = BindingContext;
+
+			// TODO: Fix book item vertical scroll issue - RowHeight - 1  = No Scroll
+
+			var itemView = new ListView {
+				//BackgroundColor = Color.Lime,
+				ItemsSource = new List<dynamic> { c },
+				ItemTemplate = new DataTemplate (typeof(ListTemplateLayout)),
+				HasUnevenRows = false,
+				IsPullToRefreshEnabled = false,
+				HeightRequest = 244,
+				VerticalOptions = LayoutOptions.FillAndExpand,
+				SeparatorVisibility = SeparatorVisibility.None,
+				InputTransparent = true,
+				RowHeight = 243
+			};
+
+			itemView.ItemTapped += (sender, e) => {
+				((ListView)sender).SelectedItem = null;
+			};
+
+			itemView.ItemSelected += (sender, e) => {
+				if (e.SelectedItem == null)
+					return;
+
+				var currentItem = (ProductCatalog)e.SelectedItem;
+				var page = new DetailsPopup (currentItem, LibraryType.NewsLetter);
+				NewsletterView.Instance.Navigation.PushAsync (page, false);
+			};
+
+			View = itemView;
+		}
+	}
+
+	public class DynamicDocsTemplateLayout : ViewCell
+	{
+		protected override void OnBindingContextChanged ()
+		{
+			base.OnBindingContextChanged ();
+
+			dynamic c = BindingContext;
+
+			// TODO: Fix book item vertical scroll issue - RowHeight - 1  = No Scroll
+
+			var itemView = new ListView {
+				//BackgroundColor = Color.Lime,
+				ItemsSource = new List<dynamic> { c },
+				ItemTemplate = new DataTemplate (typeof(ListTemplateLayout)),
+				HasUnevenRows = false,
+				IsPullToRefreshEnabled = false,
+				HeightRequest = 244,
+				VerticalOptions = LayoutOptions.FillAndExpand,
+				SeparatorVisibility = SeparatorVisibility.None,
+				InputTransparent = true,
+				RowHeight = 243
+			};
+
+			itemView.ItemTapped += (sender, e) => {
+				((ListView)sender).SelectedItem = null;
+			};
+
+			itemView.ItemSelected += (sender, e) => {
+				if (e.SelectedItem == null)
+					return;
+
+				var currentItem = (Downloads)e.SelectedItem;
+				var page = new DocumentDetails (currentItem);
+				MyDocumentsView.Instance.Navigation.PushAsync (page, false);
+			};
+
+			View = itemView;
+		}
+	}
+
+
+
+	public class ListTemplateLayout : ViewCell
+	{
+		protected override void OnBindingContextChanged ()
+		{
+			base.OnBindingContextChanged ();
+
+			dynamic c = BindingContext;
+
+			Grid details = new Grid {
+				//Padding = 5,
+				VerticalOptions = LayoutOptions.Start,
+				HorizontalOptions = LayoutOptions.CenterAndExpand,
+				RowDefinitions = {
+					new RowDefinition { Height = GridLength.Auto },
+					new RowDefinition { Height = GridLength.Auto },
+				},
+				ColumnDefinitions = {
+					new ColumnDefinition { Width = new GridLength (1, GridUnitType.Star) },
 				}
 			};
 
-			this.View = frame;
+			var thumbnailImage = new CachedImage {
+				Aspect = Aspect.AspectFit,
+				Source = c.ThumbPath,
+				HorizontalOptions =
+					LayoutOptions.CenterAndExpand,
+				VerticalOptions =
+					LayoutOptions.CenterAndExpand,
+				HeightRequest = 183,
+				WidthRequest = 183,
+				BackgroundColor = ColorConstants.SemiOpaqueBackground,
+				CacheDuration = TimeSpan.FromDays (30),
+				DownsampleHeight = 80,
+				RetryCount = 3,
+				RetryDelay = 250,
+				TransparencyEnabled = false,
+				ErrorPlaceholder = Device.OnPlatform (iOS: "corningimages/loading.png", Android: "loading.png", WinPhone: "loading.png"),
+				LoadingPlaceholder = Device.OnPlatform (iOS: "corningimages/loading.png", Android: "loading.png", WinPhone: "loading.png"),
+			};
+
+			var title = new CustomLabel2 () {
+				Text = c.FileName,
+				FontSize = UIConstants.GetGridViewFontSize (),
+				TextColor = Color.White,
+				HorizontalOptions = LayoutOptions.Center,
+				VerticalOptions = LayoutOptions.End,
+				WidthRequest = 183,
+				HeightRequest = 40,
+			};
+
+			details.Children.Add (thumbnailImage, 0, 0);
+			details.Children.Add (title, 0, 1);
+
+			var layout = new StackLayout {
+				Padding = 0,
+				//Orientation  = LayoutOptions.,
+				Children = {
+					details
+				}
+			};
+
+			View = layout;
 		}
+
 	}
 }
 

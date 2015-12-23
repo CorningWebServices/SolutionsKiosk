@@ -34,10 +34,28 @@ namespace MediandoUI
 		UnKnown = 100,
 	}
 
+	public enum DeviceGroup
+	{
+		Small, //IPhone 4S
+		Medium, //IPhone 5, IPhone 5S, Nexus 5, 
+		Large,	//Iphone 6, Nexus 5, Galaxy S5
+		ExtraLarge //IPhone 6S, Nexus 6
+	}
+
 	public enum Orientation
 	{
 		Portrait,
 		Landscape
+	}
+
+	public enum VideoState
+	{
+		STOP,
+		RESTART,
+		PAUSE,
+		PLAY,
+		ENDED,
+		NONE
 	}
 		
 }

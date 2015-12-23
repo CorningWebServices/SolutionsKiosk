@@ -13,9 +13,9 @@ namespace MediandoUI
 		{
 			var loadingIndicator = new ActivityIndicator
 			{
-				HorizontalOptions = LayoutOptions.CenterAndExpand,
-				VerticalOptions = LayoutOptions.CenterAndExpand,
-				Scale = 2,
+				HorizontalOptions = Device.OnPlatform(LayoutOptions.CenterAndExpand,LayoutOptions.Center,LayoutOptions.Center),
+				VerticalOptions = Device.OnPlatform(LayoutOptions.CenterAndExpand,LayoutOptions.Center,LayoutOptions.Center),
+				Scale = Device.OnPlatform(2,1,1),
 				Color = Color.White
 			};
 

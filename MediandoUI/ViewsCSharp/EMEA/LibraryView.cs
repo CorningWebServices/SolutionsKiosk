@@ -19,8 +19,8 @@ namespace MediandoUI
 
 		public LibraryView ()
 		{
-			NavigationPage.SetHasNavigationBar (this, false);
-			NavigationPage.SetBackButtonTitle(this,Translation.Localize("BackButton"));
+			NavigationPage.SetTitleIcon (this, "corning_logo.png"); 
+			NavigationPage.SetBackButtonTitle (this, Translation.Localize ("BackButton"));
 			BindingContext = new LibraryViewModel ();
 			ViewModel.IsRunning = true;
 
@@ -42,18 +42,18 @@ namespace MediandoUI
 					};
 
 					grid.Children.Add (ControlUtilities.GetAppHeader (), 0, 0);
-					grid.Children.Add (GetBreadCrumbs(), 0, 1);
-					grid.Children.Add (CreateLibraryListView(), 0, 2);
-					grid.Children.Add (CreateLoadingIndicator(), 0, 2);
-					grid.Children.Add (ShowEmptyResults(), 0, 2);
+					grid.Children.Add (GetBreadCrumbs (), 0, 1);
+					grid.Children.Add (CreateLibraryListView (), 0, 2);
+					grid.Children.Add (CreateLoadingIndicator (), 0, 2);
+					grid.Children.Add (ShowEmptyResults (), 0, 2);
 				},
 				Android: () => {
 					grid = new Grid {
-						VerticalOptions = LayoutOptions.Center,
+						VerticalOptions = LayoutOptions.StartAndExpand,
 						HorizontalOptions = LayoutOptions.Center,
 						RowDefinitions = {
 							new RowDefinition { Height = GridLength.Auto },
-							new RowDefinition { Height = GridLength.Auto },
+							new RowDefinition { Height = new GridLength (1, GridUnitType.Star) },
 							//new RowDefinition { Height = GridLength.Auto },
 						},
 						ColumnDefinitions = {
@@ -62,10 +62,10 @@ namespace MediandoUI
 					};
 
 					//grid.Children.Add (ControlUtilities.GetAppHeader (), 0, 0);
-					grid.Children.Add (GetBreadCrumbs(), 0, 0);
-					grid.Children.Add (CreateLibraryListView(), 0, 1);
-					grid.Children.Add (CreateLoadingIndicator(), 0, 1);
-					grid.Children.Add (ShowEmptyResults(), 0, 1);
+					grid.Children.Add (GetBreadCrumbs (), 0, 0);
+					grid.Children.Add (CreateLibraryListView (), 0, 1);
+					grid.Children.Add (CreateLoadingIndicator (), 0, 1);
+					grid.Children.Add (ShowEmptyResults (), 0, 1);
 				},
 				WinPhone: () => {
 					grid = new Grid {
@@ -82,10 +82,10 @@ namespace MediandoUI
 					};
 
 					grid.Children.Add (ControlUtilities.GetAppHeader (), 0, 0);
-					grid.Children.Add (GetBreadCrumbs(), 0, 1);
-					grid.Children.Add (CreateLibraryListView(), 0, 2);
-					grid.Children.Add (CreateLoadingIndicator(), 0, 2);
-					grid.Children.Add (ShowEmptyResults(), 0, 2);
+					grid.Children.Add (GetBreadCrumbs (), 0, 1);
+					grid.Children.Add (CreateLibraryListView (), 0, 2);
+					grid.Children.Add (CreateLoadingIndicator (), 0, 2);
+					grid.Children.Add (ShowEmptyResults (), 0, 2);
 				}
 			);
 
@@ -112,14 +112,14 @@ namespace MediandoUI
 			if (Device.Idiom == TargetIdiom.Phone) {
 				headerimage.Source = Translation.Localize ("CorningLibraryImagePhone");
 				if (App.CurrentDevice == IOSDevices.IPhone4S
-					|| App.CurrentDevice == IOSDevices.IPhone5 || App.CurrentDevice == IOSDevices.IPhone5S) {
+				    || App.CurrentDevice == IOSDevices.IPhone5 || App.CurrentDevice == IOSDevices.IPhone5S) {
 					headerimage.HeightRequest = 130;
 				} else {
 
 					headerimage.HeightRequest = 150;
 				} 
 			} else {
-				headerimage.Source  = Translation.Localize("CorningLibraryImagePad");
+				headerimage.Source = Translation.Localize ("CorningLibraryImagePad");
 			}
 
 			headerLayout = new StackLayout { 
@@ -150,7 +150,8 @@ namespace MediandoUI
 				GlobalVariables.SelectedCategory = item.CategoryName;
 				GlobalVariables.SelectedCategoryCode = item.CategoryCode;
 
-				Navigation.PushAsync (new LibraryDetailsView ());
+
+				Navigation.PushAsync (new LibraryDetailsView (),false);
 			};
 		}
 
@@ -158,8 +159,13 @@ namespace MediandoUI
 		{
 			base.OnAppearing ();
 
-			var masterPage = this.Parent.Parent as TabbedPage;
-			masterPage.Children [0].Title = Translation.Localize ("HomeIcon");
+			Device.OnPlatform (
+				iOS: () => {
+					var masterPage = this.Parent.Parent as TabbedPage;
+					masterPage.Children [0].Title = Translation.Localize ("HomeIcon");
+				}
+			);
+
 
 			if (ViewModel == null || ViewModel.IsLoading)
 				return;
@@ -167,8 +173,6 @@ namespace MediandoUI
 
 			Device.BeginInvokeOnMainThread (() => {
 				try {
-
-
 					categories.ItemsSource = ViewModel.LibraryCategory;
 					ViewModel.IsRunning = false;
 				} catch (Exception) {
@@ -183,7 +187,7 @@ namespace MediandoUI
 		{
 
 			var home = new Button {
-				Text = Translation.Localize("HomeIcon"),
+				Text = Translation.Localize ("HomeIcon"),
 				FontSize = (Device.Idiom == TargetIdiom.Phone) 
 					? Device.GetNamedSize (NamedSize.Small, typeof(Button))
 					: Device.GetNamedSize (NamedSize.Large, typeof(Button)),
@@ -192,9 +196,19 @@ namespace MediandoUI
 			};
 
 			home.Clicked += (sender, args) => {
-				var masterPage = this.Parent.Parent as TabbedPage;
-				masterPage.Children [0].Title =  Translation.Localize ("StartIcon");
-				masterPage.CurrentPage = masterPage.Children [0];
+				Device.OnPlatform (
+					iOS: () => {
+						var masterPage = this.Parent.Parent as TabbedPage;
+						masterPage.Children [0].Title = Translation.Localize ("StartIcon");
+						masterPage.CurrentPage = masterPage.Children [0];
+					},
+					Android: () => {
+						var masterPage = this.Parent as TabbedPage;
+						//masterPage.Children [0].Title = Translation.Localize ("StartIcon");
+						masterPage.CurrentPage = masterPage.Children [0];
+					}
+				);
+
 			};
 
 			var spacer = new Label {
@@ -207,7 +221,7 @@ namespace MediandoUI
 			};
 
 			var library = new Label {
-				Text = Translation.Localize("LibraryIcon"),
+				Text = Translation.Localize ("LibraryIcon"),
 				VerticalOptions = LayoutOptions.Center,
 				HorizontalOptions = LayoutOptions.Start,
 				FontSize = (Device.Idiom == TargetIdiom.Phone) 
@@ -231,12 +245,12 @@ namespace MediandoUI
 
 		}
 
-		protected override void OnSizeAllocated(double width, double height)
+		protected override void OnSizeAllocated (double width, double height)
 		{
-			base.OnSizeAllocated(width, height); // Important!
-			if ((int)grid.WidthRequest != (int)width) {
-				grid.WidthRequest = width;
-				grid.HeightRequest = height;
+			base.OnSizeAllocated (width, height); // Important!
+			if ((int)categories.WidthRequest != (int)width) {
+				categories.WidthRequest = width;
+				categories.HeightRequest = height;
 
 				if (width > height) {
 					this.BackgroundImage = ImageConstants.landscapebackground;
@@ -259,7 +273,7 @@ namespace MediandoUI
 		public LibraryCellTemplate ()
 		{
 			var nameLabel = new Label () {
-				FontSize = UIConstants.GetHomePageFontSize(),
+				FontSize = UIConstants.GetHomePageFontSize (),
 				TextColor = Color.White,
 				HorizontalOptions = LayoutOptions.StartAndExpand,
 				VerticalOptions = LayoutOptions.Center,
@@ -272,10 +286,7 @@ namespace MediandoUI
 				HorizontalOptions = LayoutOptions.End,
 				VerticalOptions = LayoutOptions.Center,
 			};
-
-//			if (App.CurrentDevice == IOSDevices.IPhone4S || App.CurrentDevice == IOSDevices.IPhone5 || App.CurrentDevice == IOSDevices.IPhone5S) {
-//				tapImage.WidthRequest = 18;
-//			}
+				
 
 			Grid grid = new Grid {
 				Padding = 5,
@@ -308,10 +319,9 @@ namespace MediandoUI
 				}
 			};
 
-			if(Device.Idiom == TargetIdiom.Phone){
+			if (Device.Idiom == TargetIdiom.Phone) {
 				frame.Padding = 5;
-			}
-			else{
+			} else {
 				frame.Padding = 10;
 			}
 

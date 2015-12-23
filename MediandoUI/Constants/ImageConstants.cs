@@ -126,64 +126,64 @@ namespace MediandoUI
 			Device.OnPlatform
 			(
 				iOS: "corningimages/hamburger.png",
-				Android: "Images/settingsdr.png",
-				WinPhone: "Images/settings.png"
+				Android: "hamburger.png",
+				WinPhone: "hamburger.png"
 			);
 		
 		public static readonly string tiledIcon = 
 			Device.OnPlatform
 			(
 				iOS: "corningimages/tiled.png",
-				Android: "Images/settingsdr.png",
-				WinPhone: "Images/settings.png"
+				Android: "tiled.png",
+				WinPhone: "tiled.png"
 			);
 
 		public static readonly string englishIcon = 
 			Device.OnPlatform
 			(
 				iOS: "corningimages/english.png",
-				Android: "Images/settingsdr.png",
-				WinPhone: "Images/settings.png"
+				Android: "english.png",
+				WinPhone: "english.png"
 			);
 
 		public static readonly string flagIcon = 
 			Device.OnPlatform
 			(
 				iOS: "corningimages/flag.png",
-				Android: "Images/settingsdr.png",
-				WinPhone: "Images/settings.png"
+				Android: "flag.png",
+				WinPhone: "flag.png"
 			);
 
 		public static readonly string germanIcon = 
 			Device.OnPlatform
 			(
 				iOS: "corningimages/german.png",
-				Android: "Images/settingsdr.png",
-				WinPhone: "Images/settings.png"
+				Android: "german.png",
+				WinPhone: "german.png"
 			);
 
 		public static readonly string languageIcon = 
 			Device.OnPlatform
 			(
 				iOS: "corningimages/language.png",
-				Android: "Images/settingsdr.png",
-				WinPhone: "Images/settings.png"
+				Android: "language.png",
+				WinPhone:  "language.png"
 			);
 
 		public static readonly string searchIcon = 
 			Device.OnPlatform
 			(
 				iOS: "corningimages/search.png",
-				Android: "Images/settingsdr.png",
-				WinPhone: "Images/settings.png"
+				Android: "search.png",
+				WinPhone: "search.png"
 			);
 
 		public static readonly string filterIcon = 
 			Device.OnPlatform
 			(
 				iOS: "corningimages/filter.png",
-				Android: "Images/settingsdr.png",
-				WinPhone: "Images/settings.png"
+				Android: "filter.png",
+				WinPhone: "filter.png"
 			);
 
 
