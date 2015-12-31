@@ -225,7 +225,7 @@ namespace MediandoUI
 			LoadDataAsync ();
 		}
 
-		protected async void LoadDataAsync ()
+		protected void LoadDataAsync ()
 		{
 			if (ViewModel == null || ViewModel.IsLoading)
 				return;

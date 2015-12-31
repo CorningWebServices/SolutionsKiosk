@@ -1,0 +1,12 @@
+<!--
+  ~  pspdf__pdf_fragment.xml
+  ~
+  ~   PSPDFKit
+  ~
+  ~   Copyright (c) 2014-2015 PSPDFKit GmbH. All rights reserved.
+  ~
+  ~   THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY INTERNATIONAL COPYRIGHT LAW
+  ~   AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE AGREEMENT.
+  ~   UNAUTHORIZED REPRODUCTION OR DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES.
+  ~   This notice may not be removed from this file.
+  --><FrameLayout android:id="@+id/pspdf__fragment_layout" android:layout_width="match_parent" android:layout_height="match_parent" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"><ProgressBar android:id="@+id/pspdf__fragment_throbber" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" /><!-- This is an X that shows up when document couldn't be opened. --><TextView android:id="@+id/pspdf__fragment_error_cross" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:textColor="@android:color/darker_gray" android:textSize="96dp" android:text="\u2715" android:visibility="gone" tools:ignore="HardcodedText,SpUsage" /><EditText android:id="@+id/pspdf__fragment_password" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="16dp" android:layout_gravity="center" android:padding="8dp" android:hint="@string/pspdf__fragment_password_hint" android:textCursorDrawable="@null" android:inputType="textPassword" android:imeOptions="actionDone" android:visibility="gone" /></FrameLayout><!-- From: file:/Users/jernej/Workspace/PSPDFKit/PSPDFKit/android/pspdfkit/src/main/res/layout/pspdf__pdf_fragment.xml -->

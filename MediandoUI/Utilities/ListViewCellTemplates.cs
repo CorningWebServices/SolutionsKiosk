@@ -606,17 +606,26 @@ namespace MediandoUI
 					);
 
 				} else {
-					var pdfService = DependencyService.Get<IPdfService> ();
-					if (pdfService == null)
-						return;
-					
-					if (fileItem.CategoryCode == "newsletter") {
-						pdfService.OpenPDF (LibraryType.NewsLetter, fileItem.FilePath, fileItem.FileName, 0, null);
-					} else {
-						
-						pdfService.OpenPDF (LibraryType.All, fileItem.FilePath, fileItem.FileName, 0, null);
+					Device.OnPlatform (
+						iOS: () => {
+							var pdfService = DependencyService.Get<IPdfService> ();
+							if (pdfService == null)
+								return;
 
-					}
+							if (fileItem.CategoryCode == "newsletter") {
+								pdfService.OpenPDF (LibraryType.NewsLetter, fileItem.FilePath, fileItem.FileName, 0, null);
+							} else {
+								pdfService.OpenPDF (LibraryType.All, fileItem.FilePath, fileItem.FileName, 0, null);
+
+							}
+						},
+						Android: () => {
+							var page = (Page)Activator.CreateInstance (typeof(ViewerPage), fileItem);
+							this.ParentView.Navigation.PushAsync (page, true);
+						}
+					);
+
+
 				}
 
 			};

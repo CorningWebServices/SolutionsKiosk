@@ -1,0 +1,12 @@
+<!--
+  ~  pspdf__test_gradient.xml
+  ~
+  ~   PSPDFKit
+  ~
+  ~   Copyright (c) 2014-2015 PSPDFKit GmbH. All rights reserved.
+  ~
+  ~   THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY INTERNATIONAL COPYRIGHT LAW
+  ~   AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE AGREEMENT.
+  ~   UNAUTHORIZED REPRODUCTION OR DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES.
+  ~   This notice may not be removed from this file.
+  --><shape android:shape="rectangle" xmlns:android="http://schemas.android.com/apk/res/android"><gradient android:angle="45" android:centerColor="#000039" android:endColor="#b5b6d2" android:startColor="#00BB33" android:type="linear" /><corners android:radius="0dp" /><stroke android:width="8px" android:color="#ff00ffff" /></shape><!-- From: file:/Users/jernej/Workspace/PSPDFKit/PSPDFKit/android/pspdfkit/src/main/res/drawable/pspdf__test_gradient.xml -->

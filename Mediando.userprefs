@@ -1,15 +1,27 @@
 ﻿<Properties StartupItem="Targets/Droid/Mediando.Droid.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.Xamarin_Android_API_15" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Targets/Droid/DependencyService/PdfService.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.065113cd006b5fa5" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="MediandoUI/Utilities/ListViewCellTemplates.cs">
     <Files>
-      <File FileName="Targets/Droid/DependencyService/PdfService.cs" Line="28" Column="29" />
-      <File FileName="Targets/Droid/DependencyService/LocaleService.cs" Line="1" Column="1" />
-      <File FileName="MediandoUI/ViewsCSharp/AppSelectorView.cs" Line="1" Column="1" />
-      <File FileName="Targets/Droid/MainActivity.cs" Line="33" Column="2" />
+      <File FileName="Targets/Droid/MainActivity.cs" Line="23" Column="1" />
+      <File FileName="Targets/Droid/DependencyService/PdfService.cs" Line="38" Column="65" />
+      <File FileName="MediandoUI/Utilities/ListViewCellTemplates.cs" Line="652" Column="4" />
+      <File FileName="Targets/Droid/Properties/AndroidManifest.xml" Line="14" Column="12" />
+      <File FileName="Targets/Droid/Resources/values/Colors.xml" Line="1" Column="1" />
+      <File FileName="Targets/Droid/Resources/values/Strings.xml" Line="1" Column="1" />
+      <File FileName="Targets/Droid/Resources/values/Styles.xml" Line="1" Column="1" />
+      <File FileName="Targets/Droid/Renderers/NavigatonRenderer.cs" Line="1" Column="1" />
+      <File FileName="Targets/Droid/ViewerActivity.cs" Line="83" Column="48" />
+      <File FileName="Targets/Droid/PDFRenderer.cs" Line="23" Column="1" />
+      <File FileName="Targets/Droid/Renderers/DocumentHelper.cs" Line="88" Column="1" />
+      <File FileName="MediandoUI/ViewsCSharp/EMEA/ViewerPage.cs" Line="11" Column="1" />
+      <File FileName="Targets/Droid/packages.config" Line="17" Column="12" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/muralidatla/Documents/SolutionsKiosk/MediandoUI/ViewsCSharp/EMEA/ViewerPage.cs" line="11" column="1" />
+      <Breakpoint file="/Users/muralidatla/Documents/SolutionsKiosk/MediandoUI/Utilities/ListViewCellTemplates.cs" line="624" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.ItemProperties.Targets.Mediando.Droid AndroidDesignerPreferredDevice="Nexus 5" />
